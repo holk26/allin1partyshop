@@ -1,0 +1,219 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Navigation from '@components/Navigation.astro';
+import Footer from '@components/Footer.astro';
+import Section from '@components/ui/Section.astro';
+import Container from '@components/ui/Container.astro';
+
+const categories = [
+  {
+    name: 'Tents',
+    description: 'Frame, Marquee, Pop Up, Tent Walls, Liners & Lighting',
+    img: 'https://allin1partyshop.s3.amazonaws.com/general/_400x400_crop_center-center_75_none/IMG_1338.jpg',
+    href: 'https://allin1partyshop.com/products/tents',
+  },
+  {
+    name: 'Tables',
+    description: 'Banquet, Cocktail, Round, Serpentine & Square',
+    img: 'https://allin1partyshop.s3.amazonaws.com/general/_400x400_crop_center-center_75_none/Neville-Black-03.JPG',
+    href: 'https://allin1partyshop.com/products/tables',
+  },
+  {
+    name: 'Chairs',
+    description: 'All Chairs, Bar Stools & Ceremony Benches',
+    img: 'https://allin1partyshop.s3.amazonaws.com/products-2019/_400x400_crop_center-center_75_none/black-folding-chiar.webp',
+    href: 'https://allin1partyshop.com/products/chairs',
+  },
+  {
+    name: 'Linen',
+    description: 'Table linens, runners & overlays in every colour',
+    img: 'https://allin1partyshop.s3.amazonaws.com/products/_400x400_crop_center-center_75_none/linen-1.jpg',
+    href: 'https://allin1partyshop.com/products/linen',
+  },
+  {
+    name: 'Dishware',
+    description: 'Plates, bowls & serving ware for every occasion',
+    img: 'https://allin1partyshop.s3.amazonaws.com/products-2019/_400x400_crop_center-center_75_none/GR10_2025-10-28-224820_vgai.jpeg',
+    href: 'https://allin1partyshop.com/products/dishware',
+  },
+  {
+    name: 'Glassware',
+    description: 'Wine, champagne, water & specialty glasses',
+    img: 'https://allin1partyshop.s3.amazonaws.com/products-2019/_400x400_crop_center-center_75_none/Water-goblet_2025-10-28-224949_sjfo.jpg',
+    href: 'https://allin1partyshop.com/products/glassware',
+  },
+  {
+    name: 'Flatware',
+    description: 'Forks, knives, spoons & serving utensils',
+    img: 'https://allin1partyshop.s3.amazonaws.com/products/_400x400_crop_center-center_75_none/MALVERN-1-1.jpg',
+    href: 'https://allin1partyshop.com/products/flatware',
+  },
+  {
+    name: 'Food Service',
+    description: 'Chafing dishes, serving trays & buffet equipment',
+    img: 'https://allin1partyshop.s3.amazonaws.com/products-2019/_400x400_crop_center-center_75_none/Chafing-unit_2025-10-28-223705_nqko.jpg',
+    href: 'https://allin1partyshop.com/products/food-service',
+  },
+  {
+    name: 'Bar & Beverage',
+    description: 'Bars, dispensers, ice buckets & drink service',
+    img: 'https://allin1partyshop.s3.amazonaws.com/products/_400x400_crop_center-center_75_none/barrel-bar_2025-10-29-204419_qrsw.jpg',
+    href: 'https://allin1partyshop.com/products/bar-beverage',
+  },
+  {
+    name: 'Marquee / Neon Signs',
+    description: 'LED marquee letters, neon signs & number sets',
+    img: 'https://allin1partyshop.s3.amazonaws.com/products/_400x400_crop_center-center_75_none/love-1.jpg',
+    href: 'https://allin1partyshop.com/products/marquee-neon-signs-numbers',
+  },
+  {
+    name: 'Backdrops',
+    description: 'Fabric, floral & novelty backdrops for photo ops',
+    img: 'https://allin1partyshop.s3.amazonaws.com/products/_400x400_crop_center-center_75_none/mermiad.jpg',
+    href: 'https://allin1partyshop.com/products/backdrops',
+  },
+  {
+    name: 'Wedding & Event Decor',
+    description: 'Centrepieces, arches, florals & decorative accents',
+    img: 'https://allin1partyshop.s3.amazonaws.com/galleries/_400x400_crop_center-center_75_none/Neville-Black-01.JPG',
+    href: 'https://allin1partyshop.com/products/wedding-event-decor',
+  },
+  {
+    name: 'Flooring',
+    description: 'Dance floors, carpet & outdoor flooring solutions',
+    img: 'https://allin1partyshop.s3.amazonaws.com/general/_400x400_crop_center-center_75_none/IMG_2891.jpg',
+    href: 'https://allin1partyshop.com/products/flooring',
+  },
+  {
+    name: 'Heaters, BBQs & Pig Roaster',
+    description: 'Propane heaters, BBQ grills & commercial pig roasters',
+    img: 'https://allin1partyshop.s3.amazonaws.com/products/_400x400_crop_center-center_75_none/pillar-1.jpg',
+    href: 'https://allin1partyshop.com/products/heaters-bbqs-pig-roaster',
+  },
+  {
+    name: 'Lighting Solutions',
+    description: 'String lights, uplighting, chandeliers & LED wash',
+    img: 'https://allin1partyshop.s3.amazonaws.com/products-2019/_400x400_crop_center-center_75_none/no-liner-only-lights3.jpg',
+    href: 'https://allin1partyshop.com/products/lighting-solutions',
+  },
+  {
+    name: 'Party Equipment',
+    description: 'Games, novelty items & entertainment equipment',
+    img: 'https://allin1partyshop.s3.amazonaws.com/products-2019/_400x400_crop_center-center_75_none/Wheel.jpeg',
+    href: 'https://allin1partyshop.com/products/party-equipment',
+  },
+  {
+    name: 'A/V Equipment',
+    description: 'Sound systems, microphones, projectors & screens',
+    img: 'https://allin1partyshop.s3.amazonaws.com/products/_400x400_crop_center-center_75_none/Passport-Event.jpg',
+    href: 'https://allin1partyshop.com/products/av-equipment',
+  },
+  {
+    name: 'Pipe & Drape',
+    description: 'Room dividers, booth backdrops & draped partitions',
+    img: 'https://allin1partyshop.s3.amazonaws.com/products/_400x400_crop_center-center_75_none/DRAPEBLK.jpg',
+    href: 'https://allin1partyshop.com/products/pipe-and-drape',
+  },
+  {
+    name: 'Staging',
+    description: 'Portable stages, risers & podiums',
+    img: 'https://allin1partyshop.s3.amazonaws.com/products/_400x400_crop_center-center_75_none/stage-drape.jpg',
+    href: 'https://allin1partyshop.com/products/staging',
+  },
+  {
+    name: 'Cake & Cupcake',
+    description: 'Cake stands, cupcake towers & dessert displays',
+    img: 'https://allin1partyshop.s3.amazonaws.com/products/_400x400_crop_center-center_75_none/cupcake.jpg',
+    href: 'https://allin1partyshop.com/products/cake-cupcake',
+  },
+  {
+    name: 'Pillars, Columns & Pedestals',
+    description: 'Decorative pillars, columns & display pedestals',
+    img: 'https://allin1partyshop.s3.amazonaws.com/products/_400x400_crop_center-center_75_none/pillar-1.jpg',
+    href: 'https://allin1partyshop.com/products/pillars-columns-pedestals',
+  },
+  {
+    name: 'Economy Essentials',
+    description: 'Affordable basics for every event budget',
+    img: 'https://allin1partyshop.s3.amazonaws.com/products-2019/_400x400_crop_center-center_75_none/PW7-1.jpeg',
+    href: 'https://allin1partyshop.com/products/economy-essentials',
+  },
+  {
+    name: 'Clearance Sale',
+    description: 'Great deals on discounted rental items',
+    img: 'https://allin1partyshop.s3.amazonaws.com/products/_400x400_crop_center-center_75_none/clearance.jpg',
+    href: 'https://allin1partyshop.com/products/clearance-sale',
+  },
+];
+---
+
+<Layout
+  title="Rental Categories | All In One Party Shop"
+  description="Browse all 23 rental categories — tents, tables, chairs, linens, decor, lighting and more. All In One Party Shop serves Vancouver Island since 1994."
+>
+  <Navigation currentPage="/rentals" />
+
+  <!-- Page Hero -->
+  <div class="bg-gray-900 text-white py-16">
+    <Container>
+      <div class="max-w-2xl">
+        <p class="text-brand-400 font-semibold text-sm uppercase tracking-widest mb-3">Our Inventory</p>
+        <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">Rental Categories</h1>
+        <p class="text-lg text-gray-300">
+          Vancouver Island's largest selection of party and event rentals. Browse all 23 categories below, then visit our full catalogue to build your quote.
+        </p>
+      </div>
+    </Container>
+  </div>
+
+  <Section variant="gray">
+    <Container>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {categories.map((cat) => (
+          <a
+            href={cat.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all border border-gray-100 hover:border-brand-200 hover:-translate-y-0.5"
+          >
+            <div class="aspect-square overflow-hidden">
+              <img
+                src={cat.img}
+                alt={cat.name}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                loading="lazy"
+              />
+            </div>
+            <div class="p-4">
+              <h2 class="font-bold text-gray-900 mb-1 group-hover:text-brand-600 transition-colors">
+                {cat.name}
+              </h2>
+              <p class="text-sm text-gray-500">{cat.description}</p>
+              <span class="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-brand-600">
+                View Items
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <div class="mt-14 text-center bg-white rounded-2xl p-10 shadow-sm border border-gray-100">
+        <h2 class="text-2xl font-bold text-gray-900 mb-3">Can't find what you need?</h2>
+        <p class="text-gray-600 mb-6 max-w-lg mx-auto">
+          Our catalogue is always growing. Contact us and our team will do their best to source or suggest alternatives for your event.
+        </p>
+        <a
+          href="/contact"
+          class="inline-block bg-brand-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-brand-700 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2"
+        >
+          Get in Touch
+        </a>
+      </div>
+    </Container>
+  </Section>
+
+  <Footer />
+</Layout>

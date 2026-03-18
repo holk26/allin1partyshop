@@ -2,17 +2,17 @@
 interface Props {
   title: string;
   description?: string;
-  lang?: 'en' | 'es';
+  lang?: 'en';
   image?: string;
   keywords?: string;
 }
 
 const {
   title,
-  description = "Un sitio web moderno creado con Astro y TailwindCSS",
-  lang = 'es',
+  description = "All In One Party Shop — Vancouver Island's premier party and event rental company. Tents, tables, chairs, linens, decor and more. Serving Comox Valley & Campbell River since 1994.",
+  lang = 'en',
   image = '/og-image.png',
-  keywords = 'Astro, TailwindCSS, TypeScript, Web Development, Fast Website, SEO',
+  keywords = 'party rentals, event rentals, Vancouver Island, Comox Valley, Campbell River, wedding rentals, tent rentals, BC',
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -27,52 +27,74 @@ const ogImage = new URL(image, Astro.site);
     <meta name="description" content={description} />
     <meta name="keywords" content={keywords} />
     <meta name="generator" content={Astro.generator} />
-    
+
     <!-- Canonical URL -->
     <link rel="canonical" href={canonicalURL} />
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
-    <meta property="og:site_name" content="FastWeb" />
-    <meta property="og:locale" content={lang === 'es' ? 'es_ES' : 'en_US'} />
-    
+    <meta property="og:site_name" content="All In One Party Shop" />
+    <meta property="og:locale" content="en_CA" />
+
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content={canonicalURL} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
-    
-    <!-- Preconnect to improve performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-    
+
     <title>{title}</title>
-    
+
     <!-- Structured Data (JSON-LD) -->
     <script is:inline type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "FastWeb",
+      "@type": "LocalBusiness",
+      "name": "All In One Party Shop",
       "description": description,
-      "url": canonicalURL,
+      "url": "https://allin1partyshop.com",
       "image": ogImage,
-      "inLanguage": lang === 'es' ? 'es-ES' : 'en-US',
+      "telephone": "250-338-6678",
+      "email": "cv@allin1partyshop.com",
+      "address": [
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "861 Shamrock Place",
+          "addressLocality": "Comox",
+          "addressRegion": "BC",
+          "postalCode": "V9M 4G4",
+          "addressCountry": "CA",
+        },
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "1360 Homewood Road",
+          "addressLocality": "Campbell River",
+          "addressRegion": "BC",
+          "postalCode": "V9W 6Y5",
+          "addressCountry": "CA",
+        },
+      ],
+      "openingHours": "Mo-Fr 10:00-16:00",
+      "inLanguage": "en-CA",
     })} />
   </head>
-  <body class="bg-gray-50 text-gray-900 antialiased">
+  <body class="bg-white text-gray-900 antialiased font-sans">
     <!-- Skip to main content for accessibility -->
-    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-indigo-600 focus:text-white focus:rounded-lg">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-brand-600 focus:text-white focus:rounded-lg">
       Skip to main content
     </a>
-    
+
     <main id="main-content">
       <slot />
     </main>

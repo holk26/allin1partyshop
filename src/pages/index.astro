@@ -8,46 +8,231 @@ import Section from '@components/ui/Section.astro';
 import Container from '@components/ui/Container.astro';
 import { useTranslations, type Language } from '@/i18n/translations';
 
-const lang: Language = 'es';
+const lang: Language = 'en';
 const t = useTranslations(lang);
+
+const categories = [
+  { name: 'Tents', img: 'https://allin1partyshop.s3.amazonaws.com/general/_400x400_crop_center-center_75_none/IMG_1338.jpg', href: 'https://allin1partyshop.com/products/tents' },
+  { name: 'Tables', img: 'https://allin1partyshop.s3.amazonaws.com/general/_400x400_crop_center-center_75_none/Neville-Black-03.JPG', href: 'https://allin1partyshop.com/products/tables' },
+  { name: 'Chairs', img: 'https://allin1partyshop.s3.amazonaws.com/products-2019/_400x400_crop_center-center_75_none/black-folding-chiar.webp', href: 'https://allin1partyshop.com/products/chairs' },
+  { name: 'Linen', img: 'https://allin1partyshop.s3.amazonaws.com/products/_400x400_crop_center-center_75_none/linen-1.jpg', href: 'https://allin1partyshop.com/products/linen' },
+  { name: 'Dishware', img: 'https://allin1partyshop.s3.amazonaws.com/products-2019/_400x400_crop_center-center_75_none/GR10_2025-10-28-224820_vgai.jpeg', href: 'https://allin1partyshop.com/products/dishware' },
+  { name: 'Glassware', img: 'https://allin1partyshop.s3.amazonaws.com/products-2019/_400x400_crop_center-center_75_none/Water-goblet_2025-10-28-224949_sjfo.jpg', href: 'https://allin1partyshop.com/products/glassware' },
+  { name: 'Flatware', img: 'https://allin1partyshop.s3.amazonaws.com/products/_400x400_crop_center-center_75_none/MALVERN-1-1.jpg', href: 'https://allin1partyshop.com/products/flatware' },
+  { name: 'Marquee Signs', img: 'https://allin1partyshop.s3.amazonaws.com/products/_400x400_crop_center-center_75_none/love-1.jpg', href: 'https://allin1partyshop.com/products/marquee-neon-signs-numbers' },
+  { name: 'Backdrops', img: 'https://allin1partyshop.s3.amazonaws.com/products/_400x400_crop_center-center_75_none/mermiad.jpg', href: 'https://allin1partyshop.com/products/backdrops' },
+  { name: 'Wedding Decor', img: 'https://allin1partyshop.s3.amazonaws.com/galleries/_400x400_crop_center-center_75_none/Neville-Black-01.JPG', href: 'https://allin1partyshop.com/products/wedding-event-decor' },
+  { name: 'Lighting', img: 'https://allin1partyshop.s3.amazonaws.com/products-2019/_400x400_crop_center-center_75_none/no-liner-only-lights3.jpg', href: 'https://allin1partyshop.com/products/lighting-solutions' },
+  { name: 'Bar & Beverage', img: 'https://allin1partyshop.s3.amazonaws.com/products/_400x400_crop_center-center_75_none/barrel-bar_2025-10-29-204419_qrsw.jpg', href: 'https://allin1partyshop.com/products/bar-beverage' },
+];
+
+const faqItems = [
+  {
+    question: 'What areas do you serve?',
+    answer: 'We serve all of Vancouver Island and the Gulf Islands, with showrooms in Comox Valley and Campbell River. Delivery is available throughout the region.',
+  },
+  {
+    question: 'How far in advance should I book?',
+    answer: 'We recommend booking as early as possible, especially for peak season (May–September) and weekends. Popular items like tents can book up 6–12 months in advance for summer weddings.',
+  },
+  {
+    question: 'Do you deliver and set up?',
+    answer: 'Yes! We offer professional delivery, setup, and takedown services. Pricing is based on location and the size of your rental order. Contact us for a custom quote.',
+  },
+  {
+    question: 'Can I pick up my rental items?',
+    answer: 'Yes, you\'re welcome to pick up smaller items from either of our showrooms in Comox or Campbell River. Large items like tents require delivery and professional setup.',
+  },
+];
 ---
 
-<Layout 
+<Layout
   title={t.meta.defaultTitle}
   description={t.meta.defaultDescription}
   lang={lang}
 >
-  <Navigation lang={lang} />
+  <Navigation lang={lang} currentPage="/" />
   <Hero lang={lang} />
+
+  <!-- Rental Categories Grid -->
+  <Section id="rentals-preview" variant="gray">
+    <Container>
+      <div class="text-center mb-12">
+        <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Browse Our Rentals</h2>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">From elegant tablescapes to grand event tents — we have everything for your perfect event.</p>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+        {categories.map((cat) => (
+          <a
+            href={cat.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group relative rounded-xl overflow-hidden shadow hover:shadow-lg transition-shadow aspect-square"
+          >
+            <img
+              src={cat.img}
+              alt={cat.name}
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
+            <span class="absolute bottom-3 left-3 right-3 text-white font-semibold text-sm">{cat.name}</span>
+          </a>
+        ))}
+      </div>
+      <div class="text-center mt-10">
+        <a
+          href="/rentals"
+          class="inline-block bg-brand-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-brand-700 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2"
+        >
+          View All 23 Categories →
+        </a>
+      </div>
+    </Container>
+  </Section>
+
   <Features lang={lang} />
-  
+
   <!-- About Section -->
-  <Section id="acerca" variant="gray">
-    <Container size="sm">
-      <div class="text-center">
-        <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
-          {t.about.title}
-        </h2>
-        <p class="text-lg text-gray-600 mb-6">
-          {t.about.content1}
-        </p>
-        <p class="text-lg text-gray-600">
-          {t.about.content2}
-        </p>
+  <Section id="about" variant="gray">
+    <Container size="md">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">{t.about.title}</h2>
+          <p class="text-brand-600 font-semibold mb-6">{t.about.subtitle}</p>
+          <p class="text-lg text-gray-600 mb-5">{t.about.content1}</p>
+          <p class="text-lg text-gray-600 mb-8">{t.about.content2}</p>
+          <a
+            href="/about"
+            class="inline-block border-2 border-brand-600 text-brand-600 px-6 py-2.5 rounded-lg font-semibold hover:bg-brand-600 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2"
+          >
+            Our Full Story
+          </a>
+        </div>
+        <div class="rounded-2xl overflow-hidden shadow-xl">
+          <img
+            src="https://allin1partyshop.s3.amazonaws.com/general/IMG_6565.JPG"
+            alt="All In One Party Shop marquee tent setup"
+            class="w-full h-80 object-cover"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- FAQ Section -->
+  <Section id="faq" variant="white">
+    <Container size="md">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
+        <p class="text-lg text-gray-600">Quick answers to common questions about renting with us.</p>
+      </div>
+      <div class="space-y-4 max-w-3xl mx-auto">
+        {faqItems.map((item) => (
+          <div class="border border-gray-200 rounded-xl overflow-hidden">
+            <details class="group">
+              <summary class="flex justify-between items-center cursor-pointer px-6 py-4 font-semibold text-gray-900 hover:bg-gray-50 transition-colors list-none">
+                <span>{item.question}</span>
+                <svg class="w-5 h-5 text-brand-600 shrink-0 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                </svg>
+              </summary>
+              <div class="px-6 pb-5 text-gray-600 border-t border-gray-100 pt-4">
+                {item.answer}
+              </div>
+            </details>
+          </div>
+        ))}
+      </div>
+      <div class="text-center mt-8">
+        <a href="/faq" class="text-brand-600 font-semibold hover:text-brand-700 transition-colors">
+          View all FAQs →
+        </a>
       </div>
     </Container>
   </Section>
 
   <!-- Contact Section -->
-  <Section id="contacto" variant="white">
-    <Container size="md">
-      <div class="text-center">
-        <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
-          {t.contact.title}
-        </h2>
-        <p class="text-lg text-gray-600 mb-8">
-          {t.contact.subtitle}
-        </p>
+  <Section id="contact" variant="gray">
+    <Container>
+      <div class="text-center mb-12">
+        <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">{t.contact.title}</h2>
+        <p class="text-lg text-gray-600">{t.contact.subtitle}</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <!-- Comox Valley -->
+        <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+          <h3 class="text-xl font-bold text-gray-900 mb-4">📍 {t.contact.comoxValley}</h3>
+          <address class="not-italic text-gray-600 mb-4 space-y-1">
+            <p class="font-medium">861 Shamrock Place</p>
+            <p>Comox, BC V9M 4G4</p>
+          </address>
+          <div class="space-y-2 text-sm">
+            <p>
+              <span class="font-medium text-gray-700">Phone: </span>
+              <a href="tel:2503386678" class="text-brand-600 hover:text-brand-700 transition-colors">250-338-6678</a>
+            </p>
+            <p>
+              <span class="font-medium text-gray-700">Email: </span>
+              <a href="mailto:cv@allin1partyshop.com" class="text-brand-600 hover:text-brand-700 transition-colors">cv@allin1partyshop.com</a>
+            </p>
+            <p class="text-gray-600 pt-2">
+              <span class="font-medium text-gray-700">Hours: </span>{t.contact.hoursDetail}
+            </p>
+          </div>
+          <a
+            href="https://maps.google.com/?q=861+Shamrock+Place,+Comox,+BC"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-5 inline-block text-sm text-brand-600 font-semibold hover:text-brand-700 transition-colors"
+          >
+            Get Directions →
+          </a>
+        </div>
+
+        <!-- Campbell River -->
+        <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+          <h3 class="text-xl font-bold text-gray-900 mb-4">📍 {t.contact.campbellRiver}</h3>
+          <address class="not-italic text-gray-600 mb-4 space-y-1">
+            <p class="font-medium">1360 Homewood Road</p>
+            <p>Campbell River, BC V9W 6Y5</p>
+          </address>
+          <div class="space-y-2 text-sm">
+            <p>
+              <span class="font-medium text-gray-700">Phone: </span>
+              <a href="tel:2502878159" class="text-brand-600 hover:text-brand-700 transition-colors">250-287-8159</a>
+            </p>
+            <p>
+              <span class="font-medium text-gray-700">Email: </span>
+              <a href="mailto:cr@allin1partyshop.com" class="text-brand-600 hover:text-brand-700 transition-colors">cr@allin1partyshop.com</a>
+            </p>
+            <p>
+              <span class="font-medium text-gray-700">{t.contact.emergency}: </span>
+              <a href="tel:2502870269" class="text-brand-600 hover:text-brand-700 transition-colors">250-287-0269</a>
+            </p>
+            <p class="text-gray-600 pt-2">
+              <span class="font-medium text-gray-700">Hours: </span>{t.contact.hoursDetail}
+            </p>
+          </div>
+          <a
+            href="https://maps.google.com/?q=1360+Homewood+Road,+Campbell+River,+BC"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-5 inline-block text-sm text-brand-600 font-semibold hover:text-brand-700 transition-colors"
+          >
+            Get Directions →
+          </a>
+        </div>
+      </div>
+
+      <div class="text-center mt-10">
+        <a
+          href="/contact"
+          class="inline-block bg-brand-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-brand-700 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2"
+        >
+          Send Us a Message
+        </a>
       </div>
     </Container>
   </Section>

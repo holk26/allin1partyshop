@@ -1,0 +1,166 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Navigation from '@components/Navigation.astro';
+import Footer from '@components/Footer.astro';
+import Section from '@components/ui/Section.astro';
+import Container from '@components/ui/Container.astro';
+---
+
+<Layout
+  title="About Us | All In One Party Shop"
+  description="Learn the story of All In One Party Shop — a family-owned event rental business serving Vancouver Island since 1994, founded by Tessa Tomlinson."
+>
+  <Navigation currentPage="/about" />
+
+  <!-- Page Hero -->
+  <div class="relative bg-gray-900 text-white py-20 overflow-hidden">
+    <img
+      src="https://allin1partyshop.s3.amazonaws.com/general/Wonder-Woman-Shoot-wedluxe-0183.jpg"
+      alt="Elegant wedding decor by All In One Party Shop"
+      class="absolute inset-0 w-full h-full object-cover opacity-30"
+    />
+    <div class="relative">
+      <Container>
+        <div class="max-w-2xl">
+          <p class="text-brand-400 font-semibold text-sm uppercase tracking-widest mb-3">Our Story</p>
+          <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">About All In One Party Shop</h1>
+          <p class="text-lg text-gray-300">
+            A family business rooted in community and a passion for celebration — serving Vancouver Island since 1994.
+          </p>
+        </div>
+      </Container>
+    </div>
+  </div>
+
+  <!-- History Section -->
+  <Section variant="white">
+    <Container size="md">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-14 items-start">
+        <div>
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Our History</h2>
+          <div class="prose prose-lg text-gray-600 space-y-5">
+            <p>
+              All In One Party Shop began in <strong>1994</strong> as <em>Campbell River Party Rentals</em>, founded by <strong>Tessa Tomlinson</strong> with a clear vision: to help the communities of Vancouver Island celebrate life's most important moments with quality rentals and personalized service.
+            </p>
+            <p>
+              What started as a modest local rental shop grew steadily over the following decades. As events became more elaborate and client expectations higher, the inventory and team expanded to match. By the early 2000s, the business had broadened its reach across Northern Vancouver Island and adopted the name <strong>All In One Party Shop</strong> — reflecting the full-service, one-stop-shop experience it had become.
+            </p>
+            <p>
+              Today we operate two full showrooms — one in <strong>Comox Valley</strong> and one in <strong>Campbell River</strong> — staffed by a dedicated team with decades of combined event experience. We stock the <strong>largest inventory of event rentals on Northern Vancouver Island</strong>, from intimate wedding setups to large corporate galas and tented events for thousands of guests.
+            </p>
+            <p>
+              After more than 30 years, we remain a proud community business, committed to making every event special — whether it's a backyard birthday party or a 5,000-person corporate event.
+            </p>
+          </div>
+        </div>
+        <div class="space-y-6">
+          <div class="rounded-2xl overflow-hidden shadow-lg">
+            <img
+              src="https://allin1partyshop.s3.amazonaws.com/general/Marco-Polo-Inn-24.JPG"
+              alt="Corporate event setup by All In One Party Shop"
+              class="w-full object-cover h-64"
+              loading="lazy"
+            />
+          </div>
+          <div class="rounded-2xl overflow-hidden shadow-lg">
+            <img
+              src="https://allin1partyshop.s3.amazonaws.com/general/IMG_0234.JPG"
+              alt="Large event tent installation"
+              class="w-full object-cover h-64"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Stats / Highlights -->
+  <Section variant="gray">
+    <Container>
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+        <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+          <p class="text-4xl font-extrabold text-brand-600 mb-2">1994</p>
+          <p class="text-gray-600 font-medium">Year Founded</p>
+        </div>
+        <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+          <p class="text-4xl font-extrabold text-brand-600 mb-2">2</p>
+          <p class="text-gray-600 font-medium">Vancouver Island Showrooms</p>
+        </div>
+        <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+          <p class="text-4xl font-extrabold text-brand-600 mb-2">23</p>
+          <p class="text-gray-600 font-medium">Rental Categories</p>
+        </div>
+        <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+          <p class="text-4xl font-extrabold text-brand-600 mb-2">5,000+</p>
+          <p class="text-gray-600 font-medium">Max Guest Capacity</p>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Services we specialize in -->
+  <Section variant="white">
+    <Container size="md">
+      <h2 class="text-3xl font-bold text-gray-900 mb-10 text-center">What We Specialize In</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div class="flex gap-4 p-6 rounded-2xl border border-gray-100 bg-gray-50">
+          <span class="text-3xl shrink-0">💍</span>
+          <div>
+            <h3 class="font-bold text-gray-900 mb-1">Weddings</h3>
+            <p class="text-sm text-gray-600">From intimate ceremonies to grand receptions, we supply everything — tents, décor, linens, tableware, lighting and more.</p>
+          </div>
+        </div>
+        <div class="flex gap-4 p-6 rounded-2xl border border-gray-100 bg-gray-50">
+          <span class="text-3xl shrink-0">🏢</span>
+          <div>
+            <h3 class="font-bold text-gray-900 mb-1">Corporate Events & Trade Shows</h3>
+            <p class="text-sm text-gray-600">Full corporate event solutions including staging, A/V equipment, pipe & drape, and branded environments.</p>
+          </div>
+        </div>
+        <div class="flex gap-4 p-6 rounded-2xl border border-gray-100 bg-gray-50">
+          <span class="text-3xl shrink-0">🎪</span>
+          <div>
+            <h3 class="font-bold text-gray-900 mb-1">Tented Events</h3>
+            <p class="text-sm text-gray-600">Frame tents, marquee tents, pop-up canopies — with walls, liners, flooring and lighting to complete the look.</p>
+          </div>
+        </div>
+        <div class="flex gap-4 p-6 rounded-2xl border border-gray-100 bg-gray-50">
+          <span class="text-3xl shrink-0">🎈</span>
+          <div>
+            <h3 class="font-bold text-gray-900 mb-1">Balloons & Lawn Bomb</h3>
+            <p class="text-sm text-gray-600">Balloon décor and our popular "Lawn Bomb" yard decorating service to surprise someone special on their big day.</p>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- CTA -->
+  <Section variant="gray">
+    <Container size="sm">
+      <div class="text-center">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Ready to plan your event?</h2>
+        <p class="text-lg text-gray-600 mb-8">
+          Our experienced team is here to help you bring your vision to life. Visit one of our showrooms or get in touch today.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="/rentals"
+            class="inline-block bg-brand-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-brand-700 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2"
+          >
+            Browse Rentals
+          </a>
+          <a
+            href="/contact"
+            class="inline-block border-2 border-brand-600 text-brand-600 px-8 py-3 rounded-lg font-semibold hover:bg-brand-600 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2"
+          >
+            Contact Us
+          </a>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Footer />
+</Layout>
