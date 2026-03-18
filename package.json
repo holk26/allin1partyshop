@@ -1,0 +1,33 @@
+{
+  "name": "fastweb",
+  "version": "1.0.0",
+  "description": "Página en astro",
+  "main": "index.js",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/holk26/fastweb.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/holk26/fastweb/issues"
+  },
+  "homepage": "https://github.com/holk26/fastweb#readme",
+  "dependencies": {
+    "@astrojs/check": "^0.9.6",
+    "@astrojs/sitemap": "^3.7.0",
+    "@astrojs/tailwind": "^6.0.2",
+    "astro": "^5.17.0",
+    "tailwindcss": "^3.4.19",
+    "typescript": "^5.9.3"
+  }
+}

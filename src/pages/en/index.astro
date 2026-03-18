@@ -1,0 +1,56 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Navigation from '@components/Navigation.astro';
+import Hero from '@components/Hero.astro';
+import Features from '@components/Features.astro';
+import Footer from '@components/Footer.astro';
+import Section from '@components/ui/Section.astro';
+import Container from '@components/ui/Container.astro';
+import { useTranslations, type Language } from '@/i18n/translations';
+
+const lang: Language = 'en';
+const t = useTranslations(lang);
+---
+
+<Layout 
+  title={t.meta.defaultTitle}
+  description={t.meta.defaultDescription}
+  lang={lang}
+>
+  <Navigation lang={lang} />
+  <Hero lang={lang} />
+  <Features lang={lang} />
+  
+  <!-- About Section -->
+  <Section id="about" variant="gray">
+    <Container size="sm">
+      <div class="text-center">
+        <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
+          {t.about.title}
+        </h2>
+        <p class="text-lg text-gray-600 mb-6">
+          {t.about.content1}
+        </p>
+        <p class="text-lg text-gray-600">
+          {t.about.content2}
+        </p>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Contact Section -->
+  <Section id="contact" variant="white">
+    <Container size="md">
+      <div class="text-center">
+        <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
+          {t.contact.title}
+        </h2>
+        <p class="text-lg text-gray-600 mb-8">
+          {t.contact.subtitle}
+        </p>
+      </div>
+    </Container>
+  </Section>
+
+  <Footer lang={lang} />
+</Layout>

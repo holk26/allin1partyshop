@@ -1,0 +1,94 @@
+---
+import { useTranslations, type Language } from '@/i18n/translations';
+
+interface Props {
+  lang?: Language;
+}
+
+const { lang = 'es' } = Astro.props;
+const t = useTranslations(lang);
+
+// Localized section IDs
+const sections = {
+  home: lang === 'en' ? 'home' : 'inicio',
+  features: lang === 'en' ? 'features' : 'caracteristicas',
+  about: lang === 'en' ? 'about' : 'acerca',
+  contact: lang === 'en' ? 'contact' : 'contacto',
+};
+---
+
+<nav class="bg-white shadow-sm sticky top-0 z-40 backdrop-blur-sm bg-white/95 supports-[backdrop-filter]:bg-white/80" role="navigation" aria-label="Main navigation">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <div class="flex items-center">
+        <a href="/" class="text-2xl font-bold text-indigo-600" aria-label="FastWeb home">
+          FastWeb
+        </a>
+      </div>
+      <div class="hidden md:flex items-center space-x-8">
+        <a href={`#${sections.home}`} class="text-gray-700 hover:text-indigo-600 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 rounded">
+          {t.nav.home}
+        </a>
+        <a href={`#${sections.features}`} class="text-gray-700 hover:text-indigo-600 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 rounded">
+          {t.nav.features}
+        </a>
+        <a href={`#${sections.about}`} class="text-gray-700 hover:text-indigo-600 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 rounded">
+          {t.nav.about}
+        </a>
+        <a href={`#${sections.contact}`} class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+          {t.nav.contact}
+        </a>
+      </div>
+      <div class="md:hidden">
+        <button 
+          id="mobile-menu-button" 
+          type="button" 
+          class="text-gray-700 hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded p-2"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          aria-label="Toggle navigation menu"
+        >
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div id="mobile-menu" class="hidden md:hidden" role="menu">
+    <div class="px-2 pt-2 pb-3 space-y-1">
+      <a href={`#${sections.home}`} class="block px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-md transition-colors" role="menuitem">
+        {t.nav.home}
+      </a>
+      <a href={`#${sections.features}`} class="block px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-md transition-colors" role="menuitem">
+        {t.nav.features}
+      </a>
+      <a href={`#${sections.about}`} class="block px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-md transition-colors" role="menuitem">
+        {t.nav.about}
+      </a>
+      <a href={`#${sections.contact}`} class="block px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-md transition-colors" role="menuitem">
+        {t.nav.contact}
+      </a>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  
+  mobileMenuButton?.addEventListener('click', () => {
+    const isExpanded = mobileMenu?.classList.contains('hidden');
+    mobileMenu?.classList.toggle('hidden');
+    mobileMenuButton?.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+  });
+  
+  // Close mobile menu when clicking a link
+  const mobileLinks = mobileMenu?.querySelectorAll('a');
+  mobileLinks?.forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu?.classList.add('hidden');
+      mobileMenuButton?.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>

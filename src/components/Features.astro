@@ -1,0 +1,66 @@
+---
+import Card from '@components/ui/Card.astro';
+import Section from '@components/ui/Section.astro';
+import Container from '@components/ui/Container.astro';
+import { useTranslations, type Language } from '@/i18n/translations';
+
+interface Props {
+  lang?: Language;
+}
+
+const { lang = 'es' } = Astro.props;
+const t = useTranslations(lang);
+const featuresId = lang === 'en' ? 'features' : 'caracteristicas';
+
+const features = [
+  {
+    title: t.features.fast.title,
+    description: t.features.fast.description,
+  },
+  {
+    title: t.features.design.title,
+    description: t.features.design.description,
+  },
+  {
+    title: t.features.responsive.title,
+    description: t.features.responsive.description,
+  },
+  {
+    title: t.features.customizable.title,
+    description: t.features.customizable.description,
+  },
+  {
+    title: t.features.seo.title,
+    description: t.features.seo.description,
+  },
+  {
+    title: t.features.typescript.title,
+    description: t.features.typescript.description,
+  },
+];
+---
+
+<Section id={featuresId} variant="white">
+  <Container>
+    <div class="text-center mb-16">
+      <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+        {t.features.title}
+      </h2>
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+        {t.features.subtitle}
+      </p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {features.map((feature) => (
+        <Card>
+          <h3 class="text-2xl font-semibold mb-3 text-gray-900">
+            {feature.title}
+          </h3>
+          <p class="text-gray-600">
+            {feature.description}
+          </p>
+        </Card>
+      ))}
+    </div>
+  </Container>
+</Section>

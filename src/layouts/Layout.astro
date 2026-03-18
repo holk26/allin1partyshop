@@ -1,0 +1,80 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  lang?: 'en' | 'es';
+  image?: string;
+  keywords?: string;
+}
+
+const {
+  title,
+  description = "Un sitio web moderno creado con Astro y TailwindCSS",
+  lang = 'es',
+  image = '/og-image.png',
+  keywords = 'Astro, TailwindCSS, TypeScript, Web Development, Fast Website, SEO',
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL(image, Astro.site);
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:site_name" content="FastWeb" />
+    <meta property="og:locale" content={lang === 'es' ? 'es_ES' : 'en_US'} />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    
+    <!-- Preconnect to improve performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    
+    <title>{title}</title>
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script is:inline type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "FastWeb",
+      "description": description,
+      "url": canonicalURL,
+      "image": ogImage,
+      "inLanguage": lang === 'es' ? 'es-ES' : 'en-US',
+    })} />
+  </head>
+  <body class="bg-gray-50 text-gray-900 antialiased">
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-indigo-600 focus:text-white focus:rounded-lg">
+      Skip to main content
+    </a>
+    
+    <main id="main-content">
+      <slot />
+    </main>
+  </body>
+</html>

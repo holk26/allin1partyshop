@@ -1,0 +1,35 @@
+---
+import Button from '@components/ui/Button.astro';
+import { useTranslations, type Language } from '@/i18n/translations';
+
+interface Props {
+  lang?: Language;
+}
+
+const { lang = 'es' } = Astro.props;
+const t = useTranslations(lang);
+const heroId = lang === 'en' ? 'home' : 'inicio';
+const featuresId = lang === 'en' ? 'features' : 'caracteristicas';
+const contactId = lang === 'en' ? 'contact' : 'contacto';
+---
+
+<section id={heroId} class="bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 text-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32">
+    <div class="text-center">
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6">
+        {t.hero.welcome} <span class="text-yellow-300">FastWeb</span>
+      </h1>
+      <p class="text-xl sm:text-2xl mb-8 text-indigo-100 max-w-3xl mx-auto">
+        {t.hero.subtitle}
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <Button href={`#${featuresId}`} variant="primary">
+          {t.hero.explore}
+        </Button>
+        <Button href={`#${contactId}`} variant="outline">
+          {t.hero.contact}
+        </Button>
+      </div>
+    </div>
+  </div>
+</section>
