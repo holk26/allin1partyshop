@@ -8,39 +8,38 @@ interface Props {
   lang?: Language;
 }
 
-const { lang = 'es' } = Astro.props;
+const { lang = 'en' } = Astro.props;
 const t = useTranslations(lang);
-const featuresId = lang === 'en' ? 'features' : 'caracteristicas';
 
 const features = [
   {
-    title: t.features.fast.title,
-    description: t.features.fast.description,
+    title: t.features.inventory.title,
+    description: t.features.inventory.description,
   },
   {
-    title: t.features.design.title,
-    description: t.features.design.description,
+    title: t.features.delivery.title,
+    description: t.features.delivery.description,
   },
   {
-    title: t.features.responsive.title,
-    description: t.features.responsive.description,
+    title: t.features.weddings.title,
+    description: t.features.weddings.description,
   },
   {
-    title: t.features.customizable.title,
-    description: t.features.customizable.description,
+    title: t.features.corporate.title,
+    description: t.features.corporate.description,
   },
   {
-    title: t.features.seo.title,
-    description: t.features.seo.description,
+    title: t.features.ordering.title,
+    description: t.features.ordering.description,
   },
   {
-    title: t.features.typescript.title,
-    description: t.features.typescript.description,
+    title: t.features.experience.title,
+    description: t.features.experience.description,
   },
 ];
 ---
 
-<Section id={featuresId} variant="white">
+<Section id="features" variant="white">
   <Container>
     <div class="text-center mb-16">
       <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
@@ -53,7 +52,7 @@ const features = [
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {features.map((feature) => (
         <Card>
-          <h3 class="text-2xl font-semibold mb-3 text-gray-900">
+          <h3 class="text-xl font-semibold mb-3 text-gray-900">
             {feature.title}
           </h3>
           <p class="text-gray-600">

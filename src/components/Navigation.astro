@@ -3,47 +3,44 @@ import { useTranslations, type Language } from '@/i18n/translations';
 
 interface Props {
   lang?: Language;
+  currentPage?: string;
 }
 
-const { lang = 'es' } = Astro.props;
+const { lang = 'en', currentPage = '/' } = Astro.props;
 const t = useTranslations(lang);
-
-// Localized section IDs
-const sections = {
-  home: lang === 'en' ? 'home' : 'inicio',
-  features: lang === 'en' ? 'features' : 'caracteristicas',
-  about: lang === 'en' ? 'about' : 'acerca',
-  contact: lang === 'en' ? 'contact' : 'contacto',
-};
 ---
 
 <nav class="bg-white shadow-sm sticky top-0 z-40 backdrop-blur-sm bg-white/95 supports-[backdrop-filter]:bg-white/80" role="navigation" aria-label="Main navigation">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-16">
       <div class="flex items-center">
-        <a href="/" class="text-2xl font-bold text-indigo-600" aria-label="FastWeb home">
-          FastWeb
+        <a href="/" class="flex items-center gap-2" aria-label="All In One Party Shop home">
+          <span class="text-brand-600 font-extrabold text-xl leading-tight">All In One</span>
+          <span class="hidden sm:inline text-gray-700 font-semibold text-sm leading-tight">Party Shop</span>
         </a>
       </div>
-      <div class="hidden md:flex items-center space-x-8">
-        <a href={`#${sections.home}`} class="text-gray-700 hover:text-indigo-600 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 rounded">
+      <div class="hidden md:flex items-center space-x-6">
+        <a href="/" class={`text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 rounded ${currentPage === '/' ? 'text-brand-600' : 'text-gray-700 hover:text-brand-600'}`}>
           {t.nav.home}
         </a>
-        <a href={`#${sections.features}`} class="text-gray-700 hover:text-indigo-600 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 rounded">
-          {t.nav.features}
+        <a href="/rentals" class={`text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 rounded ${currentPage === '/rentals' ? 'text-brand-600' : 'text-gray-700 hover:text-brand-600'}`}>
+          {t.nav.rentals}
         </a>
-        <a href={`#${sections.about}`} class="text-gray-700 hover:text-indigo-600 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 rounded">
+        <a href="/about" class={`text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 rounded ${currentPage === '/about' ? 'text-brand-600' : 'text-gray-700 hover:text-brand-600'}`}>
           {t.nav.about}
         </a>
-        <a href={`#${sections.contact}`} class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-          {t.nav.contact}
+        <a href="/faq" class={`text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 rounded ${currentPage === '/faq' ? 'text-brand-600' : 'text-gray-700 hover:text-brand-600'}`}>
+          {t.nav.faq}
+        </a>
+        <a href="/contact" class="bg-brand-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-brand-700 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2">
+          Get a Quote
         </a>
       </div>
       <div class="md:hidden">
-        <button 
-          id="mobile-menu-button" 
-          type="button" 
-          class="text-gray-700 hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded p-2"
+        <button
+          id="mobile-menu-button"
+          type="button"
+          class="text-gray-700 hover:text-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-500 rounded p-2"
           aria-expanded="false"
           aria-controls="mobile-menu"
           aria-label="Toggle navigation menu"
@@ -55,19 +52,22 @@ const sections = {
       </div>
     </div>
   </div>
-  <div id="mobile-menu" class="hidden md:hidden" role="menu">
-    <div class="px-2 pt-2 pb-3 space-y-1">
-      <a href={`#${sections.home}`} class="block px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-md transition-colors" role="menuitem">
+  <div id="mobile-menu" class="hidden md:hidden border-t border-gray-100" role="menu">
+    <div class="px-4 py-3 space-y-1">
+      <a href="/" class="block px-3 py-2 text-gray-700 hover:bg-brand-50 hover:text-brand-600 rounded-md transition-colors text-sm font-medium" role="menuitem">
         {t.nav.home}
       </a>
-      <a href={`#${sections.features}`} class="block px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-md transition-colors" role="menuitem">
-        {t.nav.features}
+      <a href="/rentals" class="block px-3 py-2 text-gray-700 hover:bg-brand-50 hover:text-brand-600 rounded-md transition-colors text-sm font-medium" role="menuitem">
+        {t.nav.rentals}
       </a>
-      <a href={`#${sections.about}`} class="block px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-md transition-colors" role="menuitem">
+      <a href="/about" class="block px-3 py-2 text-gray-700 hover:bg-brand-50 hover:text-brand-600 rounded-md transition-colors text-sm font-medium" role="menuitem">
         {t.nav.about}
       </a>
-      <a href={`#${sections.contact}`} class="block px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-md transition-colors" role="menuitem">
-        {t.nav.contact}
+      <a href="/faq" class="block px-3 py-2 text-gray-700 hover:bg-brand-50 hover:text-brand-600 rounded-md transition-colors text-sm font-medium" role="menuitem">
+        {t.nav.faq}
+      </a>
+      <a href="/contact" class="block mx-3 mt-2 px-4 py-2 bg-brand-600 text-white rounded-lg text-sm font-semibold hover:bg-brand-700 transition-colors text-center" role="menuitem">
+        Get a Quote
       </a>
     </div>
   </div>
@@ -76,13 +76,13 @@ const sections = {
 <script>
   const mobileMenuButton = document.getElementById('mobile-menu-button');
   const mobileMenu = document.getElementById('mobile-menu');
-  
+
   mobileMenuButton?.addEventListener('click', () => {
     const isExpanded = mobileMenu?.classList.contains('hidden');
     mobileMenu?.classList.toggle('hidden');
     mobileMenuButton?.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
   });
-  
+
   // Close mobile menu when clicking a link
   const mobileLinks = mobileMenu?.querySelectorAll('a');
   mobileLinks?.forEach(link => {

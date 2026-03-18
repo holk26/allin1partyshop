@@ -1,0 +1,166 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Navigation from '@components/Navigation.astro';
+import Footer from '@components/Footer.astro';
+import Section from '@components/ui/Section.astro';
+import Container from '@components/ui/Container.astro';
+
+const faqGroups = [
+  {
+    group: 'Ordering & Booking',
+    items: [
+      {
+        question: 'How do I place a rental order?',
+        answer: 'You can browse our full catalogue online at allin1partyshop.com and add items to a quote request. You can also visit either of our showrooms in Comox or Campbell River, or give us a call and our team will help you put together the perfect rental package.',
+      },
+      {
+        question: 'How far in advance should I book?',
+        answer: 'We recommend booking as early as possible, especially for peak season (May–September) and weekends. Popular items like tents can book up 6–12 months in advance for summer weddings. Corporate and large events benefit from booking 3–6 months ahead.',
+      },
+      {
+        question: 'Do I need to pay a deposit?',
+        answer: 'Yes, a deposit is required to secure your booking. The deposit amount varies depending on the size of your order. Full payment details will be provided when you confirm your reservation.',
+      },
+      {
+        question: 'Can I change my order after booking?',
+        answer: 'Yes, changes are generally possible subject to availability. We ask that you notify us as soon as possible if you need to modify your order. Significant changes close to the event date may not always be possible for large items like tents.',
+      },
+    ],
+  },
+  {
+    group: 'Delivery & Pickup',
+    items: [
+      {
+        question: 'Do you deliver and set up?',
+        answer: 'Yes! We offer professional delivery, setup, and takedown services throughout Vancouver Island and the Gulf Islands. Pricing is based on your location and the size of your rental order. Contact us for a custom delivery quote.',
+      },
+      {
+        question: 'Can I pick up my rental items?',
+        answer: "Yes, you're welcome to pick up smaller items (chairs, tables, linens, dishware, etc.) from either of our showrooms in Comox or Campbell River. Large items like tents require delivery and professional setup by our team.",
+      },
+      {
+        question: 'What areas do you serve?',
+        answer: 'We serve all of Vancouver Island and the Gulf Islands, with showrooms in Comox Valley (Comox) and Campbell River. Our delivery range includes communities from Victoria to Port Hardy and the surrounding Gulf Islands.',
+      },
+      {
+        question: 'How do tent installations work?',
+        answer: "Our experienced crew will arrive to install your tent on the agreed date. We'll assess the site, install the frame or marquee tent, add any walls, liners, and lighting you've ordered, and ensure everything is secure and safe. Takedown is scheduled after your event.",
+      },
+    ],
+  },
+  {
+    group: 'Pricing & Policies',
+    items: [
+      {
+        question: 'How is rental pricing calculated?',
+        answer: 'Rental pricing is based on a per-item rate for a standard rental period (typically weekend or multi-day). Delivery, setup, and takedown are quoted separately based on your location and order size. Visit our catalogue online or contact us for specific pricing.',
+      },
+      {
+        question: 'What happens if something is damaged or lost?',
+        answer: "Renters are responsible for items from the time of delivery/pickup until they are returned. Damaged or missing items will be charged at replacement cost. We encourage you to count and inspect all items upon delivery. A damage waiver option may be available — ask us for details.",
+      },
+      {
+        question: 'What is your cancellation policy?',
+        answer: 'Cancellation policies vary based on the size of your order and how far in advance you cancel. Tent and large equipment orders may have different terms. Please review your rental agreement or contact us for details specific to your booking.',
+      },
+    ],
+  },
+  {
+    group: 'Events & Services',
+    items: [
+      {
+        question: 'Do you handle full wedding rentals?',
+        answer: "Absolutely! Weddings are one of our specialties. We can supply everything from tents and flooring to tableware, linens, lighting, décor, and more. Our team is happy to help you plan every detail. We've helped events ranging from intimate 20-person gatherings to grand celebrations of 5,000+ guests.",
+      },
+      {
+        question: 'Do you offer balloon services?',
+        answer: "Yes! We offer balloon décor services for all types of events — arches, columns, bouquets, and custom arrangements. Ask about our balloon packages when you contact us.",
+      },
+      {
+        question: 'What is the Lawn Bomb service?',
+        answer: "Lawn Bomb is our popular yard-decorating surprise service. We'll decorate someone's lawn with festive signs, inflatables, and décor to celebrate a birthday, graduation, anniversary, or any milestone. It's a fun way to surprise someone special!",
+      },
+      {
+        question: 'Do you rent A/V and staging equipment?',
+        answer: 'Yes, we carry sound systems, microphones, projectors, screens, portable staging, podiums, and more. These are popular for corporate events, graduations, and outdoor concerts.',
+      },
+    ],
+  },
+];
+---
+
+<Layout
+  title="FAQ | All In One Party Shop"
+  description="Frequently asked questions about renting from All In One Party Shop — ordering, delivery, pricing, policies, and more."
+>
+  <Navigation currentPage="/faq" />
+
+  <!-- Page Hero -->
+  <div class="bg-gray-900 text-white py-16">
+    <Container>
+      <div class="max-w-2xl">
+        <p class="text-brand-400 font-semibold text-sm uppercase tracking-widest mb-3">Help Centre</p>
+        <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">Frequently Asked Questions</h1>
+        <p class="text-lg text-gray-300">
+          Everything you need to know about renting with All In One Party Shop. Can't find your answer?
+          <a href="/contact" class="text-brand-400 hover:text-brand-300 underline">Contact us directly.</a>
+        </p>
+      </div>
+    </Container>
+  </div>
+
+  <Section variant="gray">
+    <Container size="md">
+      <div class="space-y-14">
+        {faqGroups.map((group) => (
+          <div>
+            <h2 class="text-2xl font-bold text-gray-900 mb-6 pb-3 border-b border-gray-200">
+              {group.group}
+            </h2>
+            <div class="space-y-3">
+              {group.items.map((item) => (
+                <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+                  <details class="group">
+                    <summary class="flex justify-between items-center cursor-pointer px-6 py-4 font-semibold text-gray-900 hover:bg-gray-50 transition-colors list-none">
+                      <span>{item.question}</span>
+                      <svg class="w-5 h-5 text-brand-600 shrink-0 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                      </svg>
+                    </summary>
+                    <div class="px-6 pb-5 text-gray-600 border-t border-gray-100 pt-4 leading-relaxed">
+                      {item.answer}
+                    </div>
+                  </details>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Still have questions? -->
+      <div class="mt-14 bg-white rounded-2xl p-10 shadow-sm border border-gray-100 text-center">
+        <h2 class="text-2xl font-bold text-gray-900 mb-3">Still have questions?</h2>
+        <p class="text-gray-600 mb-6 max-w-md mx-auto">
+          Our friendly team at both our Comox Valley and Campbell River locations is happy to help.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="tel:2503386678"
+            class="inline-block bg-brand-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-brand-700 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2"
+          >
+            📞 Call Comox Valley: 250-338-6678
+          </a>
+          <a
+            href="/contact"
+            class="inline-block border-2 border-brand-600 text-brand-600 px-8 py-3 rounded-lg font-semibold hover:bg-brand-600 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2"
+          >
+            Send a Message
+          </a>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Footer />
+</Layout>
