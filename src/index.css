@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --paper: #fcfcf8;
+  --paper-deep: #f0eee6;
+  --ink: #2a160d;
+  --ink-soft: #6f625b;
+  --line: rgb(42 22 13 / 17%);
+  --blue: #5e7edf;
+  --mint: #e7fec7;
+  --white: #fffef9;
+  --background: 60 20% 98%;
+  --foreground: 20 54% 11%;
+  --card: 60 20% 98%;
+  --card-foreground: 20 54% 11%;
+  --popover: 60 20% 98%;
+  --popover-foreground: 20 54% 11%;
+  --primary: 20 54% 11%;
+  --primary-foreground: 60 20% 98%;
+  --secondary: 45 16% 93%;
+  --secondary-foreground: 20 54% 11%;
+  --muted: 45 16% 93%;
+  --muted-foreground: 24 8% 40%;
+  --accent: 226 65% 62%;
+  --accent-foreground: 60 20% 98%;
+  --border: 20 20% 83%;
+  --input: 20 20% 83%;
+  --ring: 226 65% 62%;
+  --radius: 0.75rem;
+}
+* { box-sizing: border-box; }
+html { overflow-x: clip; scroll-behavior: smooth; scroll-padding-top: 92px; }
+body { overflow-x: clip; margin: 0; min-width: 320px; min-height: 100dvh; background: var(--paper); color: var(--ink); font-family: 'Figtree', sans-serif; font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+button, input, select, textarea { font: inherit; }
+button, a { -webkit-tap-highlight-color: transparent; }
+button { color: inherit; }
+a { color: inherit; text-decoration: none; }
+button:not(:disabled), a { cursor: pointer; }
+img { display: block; max-width: 100%; }
+::selection { background: var(--blue); color: var(--white); }
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
+#root { min-height: 100dvh; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
