@@ -1,6 +1,7 @@
 /* Scoped base styles for the /admin demo dashboard. Kept out of the global
    index.css so the storefront theme is untouched. */
 .admin-scope {
+  overflow-x: clip;
   min-height: 100dvh;
   background: #f4f6fa;
   color: #22304a;

@@ -67,19 +67,19 @@ export default function Reports({ ordersList, settings }: { ordersList: Order[];
       </div>
 
       <div className="grid gap-5 lg:grid-cols-2">
-        <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+        <section className="min-w-0 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
           <h2 className="mb-3 font-bold text-ink">Fleet utilization by category</h2>
           <p className="mb-3 text-xs text-slate-400">Share of units reserved across the current booking window.</p>
           <HBarList data={utilization} format={(n) => `${n}%`} />
         </section>
-        <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+        <section className="min-w-0 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
           <h2 className="mb-3 font-bold text-ink">Revenue by category</h2>
           <p className="mb-3 text-xs text-slate-400">Pre-tax rental revenue from active quotes &amp; orders.</p>
           <HBarList data={revenueByCat} format={(n) => money(n)} />
         </section>
       </div>
 
-      <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+      <section className="min-w-0 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
         <h2 className="mb-3 font-bold text-ink">Top rented items</h2>
         <div className="overflow-x-auto">
           <table className="w-full min-w-[520px] text-left text-sm">
