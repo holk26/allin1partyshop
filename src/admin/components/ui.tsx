@@ -149,7 +149,7 @@ export function Badge({ children, tone = 'slate' }: { children: ReactNode; tone?
     teal: 'bg-teal-100 text-teal-800 border-teal-200',
   }
   return (
-    <span className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-xs font-semibold ${tones[tone]}`}>
+    <span className={`inline-flex items-center gap-1 whitespace-nowrap rounded-full border px-2 py-0.5 text-xs font-semibold ${tones[tone]}`}>
       {children}
     </span>
   )
@@ -186,12 +186,10 @@ export function StatCard({
 export function VBarChart({ data, format }: { data: { label: string; value: number }[]; format: (n: number) => string }) {
   const max = Math.max(...data.map((d) => d.value), 1)
   return (
-    <div className="overflow-x-auto">
-      <div className="min-w-[520px]">
-      <div className="flex h-44 items-end gap-3 sm:gap-5">
+    <div className="flex h-44 items-end gap-2 sm:gap-5">
         {data.map((d) => (
           <div key={d.label} className="flex h-full flex-1 flex-col items-center justify-end gap-1.5">
-            <span className="text-[11px] font-semibold text-slate-600">{format(d.value)}</span>
+            <span className="text-[10px] font-semibold text-slate-600 sm:text-[11px]">{format(d.value)}</span>
             <div
               className="w-full max-w-12 rounded-t-lg bg-gradient-to-t from-teal to-coral transition-all"
               style={{ height: `${Math.max(6, (d.value / max) * 100)}%` }}
@@ -200,8 +198,6 @@ export function VBarChart({ data, format }: { data: { label: string; value: numb
             <span className="text-xs font-medium text-slate-500">{d.label}</span>
           </div>
         ))}
-      </div>
-      </div>
     </div>
   )
 }
