@@ -168,13 +168,13 @@ export default function AdminApp() {
               <span className="flex h-6 w-6 items-center justify-center rounded-full bg-coral text-[11px] font-bold text-white">TT</span>
               Tessa · Owner
             </span>
-            <a href="/" title="View storefront" className="hidden items-center gap-1.5 rounded-xl border border-slate-300 px-2.5 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-50 sm:flex">
+            <a href="/" title="View storefront" className="hidden items-center gap-1.5 rounded-xl border border-slate-300 px-2.5 py-2 text-sm font-semibold text-slate-600 outline-none hover:bg-slate-50 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-coral/60 sm:flex">
               <Icon name="external" size={16} />
               <span className="hidden md:inline">Store</span>
             </a>
             <button
               onClick={() => setAuthed(false)}
-              className="flex items-center gap-1.5 rounded-xl border border-slate-300 px-2.5 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-50"
+              className="flex items-center gap-1.5 rounded-xl border border-slate-300 px-2.5 py-2 text-sm font-semibold text-slate-600 outline-none hover:bg-slate-50 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-coral/60"
               title="Log out of the demo"
             >
               <Icon name="logout" size={16} />
@@ -192,7 +192,7 @@ export default function AdminApp() {
               <button
                 key={n.id}
                 onClick={() => go(n.id)}
-                className={`flex w-full items-center gap-2.5 rounded-xl px-3 py-2 text-left text-sm font-medium transition ${
+                className={`flex w-full items-center gap-2.5 rounded-xl px-3 py-2 text-left text-sm font-medium transition outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-coral/70 ${
                   tab === n.id ? 'bg-ink text-white shadow-sm' : 'text-slate-600 hover:bg-cream hover:text-ink'
                 }`}
               >
@@ -251,7 +251,7 @@ export default function AdminApp() {
               key={n.id}
               onClick={() => go(n.id)}
               aria-current={tab === n.id ? 'page' : undefined}
-              className={`relative flex flex-col items-center gap-0.5 py-2.5 text-[11px] font-semibold ${tab === n.id ? 'text-coral' : 'text-slate-500'}`}
+              className={`relative flex flex-col items-center gap-0.5 rounded-lg py-2.5 text-[11px] font-semibold outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-coral/60 ${tab === n.id ? 'text-coral' : 'text-slate-500'}`}
             >
               <span className="relative">
                 <Icon name={n.icon} size={20} />
@@ -264,7 +264,7 @@ export default function AdminApp() {
               {n.label}
             </button>
           ))}
-          <button onClick={() => setMoreOpen(true)} className="flex flex-col items-center gap-0.5 py-2.5 text-[11px] font-semibold text-slate-500">
+          <button onClick={() => setMoreOpen(true)} className="flex flex-col items-center gap-0.5 rounded-lg py-2.5 text-[11px] font-semibold text-slate-500 outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-coral/60">
             <Icon name="more" size={20} />
             More
           </button>
@@ -278,7 +278,7 @@ export default function AdminApp() {
               <button
                 key={n.id}
                 onClick={() => go(n.id)}
-                className={`flex items-center gap-3 rounded-xl px-3 py-3 text-left text-sm font-medium ${tab === n.id ? 'bg-blush/60 text-ink' : 'text-slate-600 hover:bg-cream'}`}
+                className={`flex items-center gap-3 rounded-xl px-3 py-3 text-left text-sm font-medium outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-coral/60 ${tab === n.id ? 'bg-blush/60 text-ink' : 'text-slate-600 hover:bg-cream'}`}
               >
                 <Icon name={n.icon} size={18} />
                 {n.label}
@@ -289,11 +289,11 @@ export default function AdminApp() {
                 )}
               </button>
             ))}
-            <a href="/" className="flex items-center gap-3 rounded-xl px-3 py-3 text-left text-sm font-medium text-slate-600 hover:bg-cream">
+            <a href="/" className="flex items-center gap-3 rounded-xl px-3 py-3 text-left text-sm font-medium text-slate-600 outline-none hover:bg-cream focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-coral/60">
               <Icon name="external" size={18} />
               View storefront
             </a>
-            <button onClick={() => { setAuthed(false); setMoreOpen(false) }} className="flex items-center gap-3 rounded-xl px-3 py-3 text-left text-sm font-medium text-rose-700 hover:bg-rose-50">
+            <button onClick={() => { setAuthed(false); setMoreOpen(false) }} className="flex items-center gap-3 rounded-xl px-3 py-3 text-left text-sm font-medium text-rose-700 outline-none hover:bg-rose-50 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-coral/60">
               <Icon name="logout" size={18} />
               Log out
             </button>
