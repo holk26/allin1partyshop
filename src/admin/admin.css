@@ -1,0 +1,21 @@
+/* Scoped base styles for the /admin demo dashboard. Kept out of the global
+   index.css so the storefront theme is untouched. */
+.admin-scope {
+  min-height: 100dvh;
+  background: #f4f6fa;
+  color: #22304a;
+  font-family: "Avenir Next", Avenir, "Segoe UI", system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.admin-scope *::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.admin-scope *::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 8px;
+}
+.admin-scope *::-webkit-scrollbar-track {
+  background: transparent;
+}
