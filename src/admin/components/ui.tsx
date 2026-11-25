@@ -72,6 +72,13 @@ const PATHS: Record<string, ReactNode> = {
       <path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2" />
     </>
   ),
+  more: (
+    <>
+      <circle cx="5" cy="12" r="1.6" />
+      <circle cx="12" cy="12" r="1.6" />
+      <circle cx="19" cy="12" r="1.6" />
+    </>
+  ),
   search: (
     <>
       <circle cx="11" cy="11" r="7" />
@@ -162,14 +169,14 @@ export function StatCard({
   icon: string
 }) {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+    <div className="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm sm:p-4">
       <div className="flex items-start justify-between gap-2">
-        <p className="text-sm font-medium text-slate-500">{label}</p>
-        <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl ${accent}`}>
+        <p className="text-xs font-medium text-slate-500 sm:text-sm">{label}</p>
+        <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-xl sm:h-9 sm:w-9 ${accent}`}>
           <Icon name={icon} size={19} />
         </span>
       </div>
-      <p className="mt-1 text-2xl font-bold tracking-tight text-ink">{value}</p>
+      <p className="mt-1 text-xl font-bold tracking-tight text-ink sm:text-2xl">{value}</p>
       <p className="mt-0.5 text-xs text-slate-500">{sub}</p>
     </div>
   )
@@ -179,7 +186,8 @@ export function StatCard({
 export function VBarChart({ data, format }: { data: { label: string; value: number }[]; format: (n: number) => string }) {
   const max = Math.max(...data.map((d) => d.value), 1)
   return (
-    <div>
+    <div className="overflow-x-auto">
+      <div className="min-w-[520px]">
       <div className="flex h-44 items-end gap-3 sm:gap-5">
         {data.map((d) => (
           <div key={d.label} className="flex h-full flex-1 flex-col items-center justify-end gap-1.5">
@@ -192,6 +200,7 @@ export function VBarChart({ data, format }: { data: { label: string; value: numb
             <span className="text-xs font-medium text-slate-500">{d.label}</span>
           </div>
         ))}
+      </div>
       </div>
     </div>
   )
@@ -267,29 +276,29 @@ export function Field({ label, children, hint }: { label: string; children: Reac
 }
 
 export const inputCls =
-  'w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-ink outline-none focus:border-coral focus:ring-2 focus:ring-coral/25'
+  'w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-sm text-ink outline-none focus:border-coral focus:ring-2 focus:ring-coral/25'
 
-export function PrimaryButton({ children, onClick, type = 'button' }: { children: ReactNode; onClick?: () => void; type?: 'button' | 'submit' }) {
+export function PrimaryButton({ children, onClick, type = 'button', className = '' }: { children: ReactNode; onClick?: () => void; type?: 'button' | 'submit'; className?: string }) {
   return (
     <button
       type={type}
       onClick={onClick}
-      className="inline-flex items-center gap-1.5 rounded-xl bg-coral px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-coral-dark"
+      className={`inline-flex items-center gap-1.5 rounded-xl bg-coral px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-coral-dark ${className}`}
     >
       {children}
     </button>
   )
 }
 
-export function GhostButton({ children, onClick, danger = false }: { children: ReactNode; onClick: () => void; danger?: boolean }) {
+export function GhostButton({ children, onClick, danger = false, className = '' }: { children: ReactNode; onClick: () => void; danger?: boolean; className?: string }) {
   return (
     <button
       onClick={onClick}
-      className={`inline-flex items-center gap-1.5 rounded-xl border px-3 py-2 text-sm font-semibold transition ${
+      className={`inline-flex items-center gap-1.5 rounded-xl border px-3 py-2.5 text-sm font-semibold transition ${
         danger
           ? 'border-rose-200 bg-white text-rose-700 hover:bg-rose-50'
           : 'border-slate-300 bg-white text-slate-700 hover:bg-slate-50'
-      }`}
+      } ${className}`}
     >
       {children}
     </button>
@@ -328,7 +337,7 @@ export function Toasts({ toasts }: { toasts: ToastMsg[] }) {
   }, [toasts])
   if (visible.length === 0) return null
   return (
-    <div className="pointer-events-none fixed bottom-4 left-1/2 z-[60] flex w-full max-w-sm -translate-x-1/2 flex-col items-center gap-2 px-4">
+    <div className="pointer-events-none fixed bottom-20 left-1/2 lg:bottom-4 z-[60] flex w-full max-w-sm -translate-x-1/2 flex-col items-center gap-2 px-4">
       {visible.map((t) => (
         <div
           key={t.id}
