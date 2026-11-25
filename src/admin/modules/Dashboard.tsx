@@ -39,7 +39,7 @@ export default function Dashboard({ go }: { go: (tab: string, orderId?: string) 
       </div>
 
       <div className="grid gap-5 lg:grid-cols-3">
-        <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm lg:col-span-2">
+        <section className="min-w-0 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm lg:col-span-2">
           <div className="mb-3 flex items-center justify-between">
             <h2 className="font-bold text-ink">Revenue by month</h2>
             <span className="text-xs font-medium text-slate-400">CAD, rentals + retail</span>
@@ -50,7 +50,7 @@ export default function Dashboard({ go }: { go: (tab: string, orderId?: string) 
           </p>
         </section>
 
-        <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+        <section className="min-w-0 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
           <h2 className="mb-3 font-bold text-ink">Low-stock alerts</h2>
           <ul className="space-y-2.5">
             {lowStock.map((i) => (
@@ -77,7 +77,7 @@ export default function Dashboard({ go }: { go: (tab: string, orderId?: string) 
       </div>
 
       <div className="grid gap-5 lg:grid-cols-3">
-        <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm lg:col-span-2">
+        <section className="min-w-0 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm lg:col-span-2">
           <div className="mb-2 flex items-center justify-between">
             <h2 className="font-bold text-ink">Upcoming deliveries &amp; pickups</h2>
             <button onClick={() => go('orders')} className="text-sm font-semibold text-coral hover:underline">
@@ -108,7 +108,7 @@ export default function Dashboard({ go }: { go: (tab: string, orderId?: string) 
           </ul>
         </section>
 
-        <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+        <section className="min-w-0 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
           <h2 className="mb-3 font-bold text-ink">Recent activity</h2>
           <ul className="space-y-3">
             {activity.slice(0, 6).map((a) => (
@@ -124,7 +124,7 @@ export default function Dashboard({ go }: { go: (tab: string, orderId?: string) 
         </section>
       </div>
 
-      <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+      <section className="min-w-0 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
         <h2 className="mb-3 font-bold text-ink">Revenue by category — November</h2>
         <HBarList data={revenueByCategory} format={(n) => money(n)} />
       </section>

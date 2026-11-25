@@ -40,7 +40,7 @@ export default function Customers({
       </div>
 
       <div className="grid gap-5 lg:grid-cols-5">
-        <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm lg:col-span-3">
+        <div className="min-w-0 overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm lg:col-span-3">
           <table className="w-full min-w-[480px] text-left text-sm">
             <thead>
               <tr className="border-b border-slate-100 text-xs uppercase tracking-wide text-slate-400">
@@ -73,7 +73,7 @@ export default function Customers({
           </table>
         </div>
 
-        <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm lg:col-span-2">
+        <section className="min-w-0 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm lg:col-span-2">
           {selected ? (
             <div className="space-y-3">
               <div>

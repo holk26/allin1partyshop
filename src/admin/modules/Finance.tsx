@@ -83,7 +83,7 @@ export default function Finance({
       </div>
 
       <div className="grid gap-5 lg:grid-cols-3">
-        <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm lg:col-span-2">
+        <div className="min-w-0 overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm lg:col-span-2">
           <table className="w-full min-w-[480px] text-left text-sm">
             <thead>
               <tr className="border-b border-slate-100 text-xs uppercase tracking-wide text-slate-400">
@@ -130,7 +130,7 @@ export default function Finance({
           </table>
         </div>
 
-        <section className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+        <section className="min-w-0 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
           <h2 className="mb-3 font-bold text-ink">Expenses — November</h2>
           <ul className="space-y-2.5">
             {expenseList.map((e) => (
