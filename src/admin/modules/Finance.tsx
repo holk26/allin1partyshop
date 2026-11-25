@@ -75,7 +75,7 @@ export default function Finance({
           <button
             key={s}
             onClick={() => setFilter(s)}
-            className={`rounded-full border px-3 py-1.5 text-sm font-medium ${filter === s ? 'border-coral bg-coral text-white' : 'border-slate-300 bg-white text-slate-600 hover:bg-slate-50'}`}
+            className={`rounded-full border px-3 py-2 text-sm font-medium ${filter === s ? 'border-coral bg-coral text-white' : 'border-slate-300 bg-white text-slate-600 hover:bg-slate-50'}`}
           >
             {s} ({s === 'All' ? invoices.length : invoices.filter((i) => i.status === s).length})
           </button>
@@ -84,13 +84,13 @@ export default function Finance({
 
       <div className="grid gap-5 lg:grid-cols-3">
         <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm lg:col-span-2">
-          <table className="w-full min-w-[560px] text-left text-sm">
+          <table className="w-full min-w-[480px] text-left text-sm">
             <thead>
               <tr className="border-b border-slate-100 text-xs uppercase tracking-wide text-slate-400">
                 <th className="px-4 py-3 font-semibold">Invoice</th>
                 <th className="px-4 py-3 font-semibold">Customer</th>
                 <th className="px-4 py-3 font-semibold">Amount</th>
-                <th className="px-4 py-3 font-semibold">Due</th>
+                <th className="hidden px-4 py-3 font-semibold md:table-cell">Due</th>
                 <th className="px-4 py-3 font-semibold">Status</th>
                 <th className="px-4 py-3" />
               </tr>
@@ -101,17 +101,17 @@ export default function Finance({
                   <td className="px-4 py-2.5 font-semibold text-ink">{inv.id}</td>
                   <td className="px-4 py-2.5">{inv.customer}</td>
                   <td className="px-4 py-2.5 font-medium">{money(inv.amount)}</td>
-                  <td className="px-4 py-2.5 text-slate-600">{inv.due}</td>
+                  <td className="hidden px-4 py-2.5 text-slate-600 md:table-cell">{inv.due}</td>
                   <td className="px-4 py-2.5">
                     <Badge tone={inv.status === 'Paid' ? 'green' : inv.status === 'Overdue' ? 'red' : 'amber'}>{inv.status}</Badge>
                   </td>
                   <td className="whitespace-nowrap px-4 py-2.5">
                     {inv.status !== 'Paid' && (
                       <>
-                        <button onClick={(e) => { e.stopPropagation(); markPaid(inv) }} className="rounded-lg px-2.5 py-1.5 text-xs font-semibold text-teal-dark hover:bg-mint">
+                        <button onClick={(e) => { e.stopPropagation(); markPaid(inv) }} className="rounded-lg px-3 py-2 text-xs font-semibold text-teal-dark hover:bg-mint">
                           Mark paid
                         </button>
-                        <button onClick={(e) => { e.stopPropagation(); sendReminder(inv) }} className="rounded-lg px-2.5 py-1.5 text-xs font-semibold text-coral hover:bg-blush">
+                        <button onClick={(e) => { e.stopPropagation(); sendReminder(inv) }} className="rounded-lg px-3 py-2 text-xs font-semibold text-coral hover:bg-blush">
                           Remind
                         </button>
                       </>
@@ -165,9 +165,9 @@ export default function Finance({
           <p className="mt-3 rounded-xl bg-cream px-3 py-2 text-xs text-slate-500">
             Demo invoice — in the real system this would open the PDF, payment link and the linked order.
           </p>
-          <div className="mt-4 flex justify-end gap-2">
-            <GhostButton onClick={() => setSelectedId(null)}>Close</GhostButton>
-            {selected.status !== 'Paid' && <PrimaryButton onClick={() => { markPaid(selected); setSelectedId(null) }}>Mark paid</PrimaryButton>}
+          <div className="mt-4 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
+            <GhostButton onClick={() => setSelectedId(null)} className="w-full sm:w-auto">Close</GhostButton>
+            {selected.status !== 'Paid' && <PrimaryButton onClick={() => { markPaid(selected); setSelectedId(null) }} className="w-full sm:w-auto">Mark paid</PrimaryButton>}
           </div>
         </Modal>
       )}
@@ -181,7 +181,7 @@ export default function Finance({
             <Field label="Description">
               <input value={expDraft.label} onChange={(e) => setExpDraft({ ...expDraft, label: e.target.value })} className={inputCls} placeholder="e.g. Propane refill" />
             </Field>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               <Field label="Category">
                 <select value={expDraft.category} onChange={(e) => setExpDraft({ ...expDraft, category: e.target.value })} className={inputCls}>
                   <option>Supplies</option>
@@ -196,9 +196,9 @@ export default function Finance({
                 <input type="number" min={0} step="0.01" value={expDraft.amount} onChange={(e) => setExpDraft({ ...expDraft, amount: Number(e.target.value) })} className={inputCls} />
               </Field>
             </div>
-            <div className="flex justify-end gap-2 pt-1">
-              <GhostButton onClick={() => setShowExpense(false)}>Cancel</GhostButton>
-              <PrimaryButton type="submit">Record expense</PrimaryButton>
+            <div className="flex flex-col-reverse gap-2 pt-1 sm:flex-row sm:justify-end">
+              <GhostButton onClick={() => setShowExpense(false)} className="w-full sm:w-auto">Cancel</GhostButton>
+              <PrimaryButton type="submit" className="w-full sm:w-auto">Record expense</PrimaryButton>
             </div>
           </form>
         </Modal>

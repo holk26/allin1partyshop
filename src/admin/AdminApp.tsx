@@ -24,7 +24,7 @@ import {
   type Staff,
   type TimeOff,
 } from './data'
-import { Icon, Toasts, type ToastMsg } from './components/ui'
+import { Icon, Modal, Toasts, type ToastMsg } from './components/ui'
 import Dashboard from './modules/Dashboard'
 import Inventory from './modules/Inventory'
 import Orders from './modules/Orders'
@@ -120,6 +120,7 @@ export default function AdminApp() {
   const [tab, setTab] = useState<Tab>('dashboard')
   const [focusOrderId, setFocusOrderId] = useState<string | null>(null)
   const [toasts, setToasts] = useState<ToastMsg[]>([])
+  const [moreOpen, setMoreOpen] = useState(false)
 
   const [items, setItems] = useState<RentalItem[]>(seedItems)
   const [ordersList, setOrdersList] = useState<Order[]>(seedOrders)
@@ -138,6 +139,7 @@ export default function AdminApp() {
   }, [])
 
   function go(next: string, orderId?: string) {
+    setMoreOpen(false)
     setTab(next as Tab)
     if (orderId) setFocusOrderId(orderId)
     window.scrollTo({ top: 0 })
@@ -166,9 +168,13 @@ export default function AdminApp() {
               <span className="flex h-6 w-6 items-center justify-center rounded-full bg-coral text-[11px] font-bold text-white">TT</span>
               Tessa · Owner
             </span>
+            <a href="/" title="View storefront" className="hidden items-center gap-1.5 rounded-xl border border-slate-300 px-2.5 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-50 sm:flex">
+              <Icon name="external" size={16} />
+              <span className="hidden md:inline">Store</span>
+            </a>
             <button
               onClick={() => setAuthed(false)}
-              className="flex items-center gap-1.5 rounded-xl border border-slate-300 px-2.5 py-1.5 text-sm font-semibold text-slate-600 hover:bg-slate-50"
+              className="flex items-center gap-1.5 rounded-xl border border-slate-300 px-2.5 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-50"
               title="Log out of the demo"
             >
               <Icon name="logout" size={16} />
@@ -176,21 +182,6 @@ export default function AdminApp() {
             </button>
           </div>
         </div>
-        {/* Mobile / tablet nav */}
-        <nav className="flex gap-1 overflow-x-auto px-3 pb-2 lg:hidden" aria-label="Sections">
-          {NAV.map((n) => (
-            <button
-              key={n.id}
-              onClick={() => go(n.id)}
-              className={`flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium ${
-                tab === n.id ? 'bg-ink text-white' : 'bg-slate-100 text-slate-600'
-              }`}
-            >
-              <Icon name={n.icon} size={15} />
-              {n.label}
-            </button>
-          ))}
-        </nav>
       </header>
 
       <div className="mx-auto flex w-full max-w-[1400px] flex-1 items-start">
@@ -222,10 +213,13 @@ export default function AdminApp() {
             <p className="mt-1 font-semibold text-ink">{settings.phone}</p>
             <p className="mt-1 text-slate-400">{settings.hours}</p>
           </div>
+          <a href="/" className="mt-3 flex items-center gap-1.5 px-1 text-xs font-semibold text-coral hover:underline">
+            View storefront <Icon name="external" size={13} />
+          </a>
         </aside>
 
         {/* Content */}
-        <main className="min-w-0 flex-1 px-4 py-5 sm:px-6">
+        <main className="min-w-0 flex-1 px-4 pb-24 pt-5 sm:px-6 lg:pb-6 xl:px-8">
           {tab === 'dashboard' && <Dashboard go={go} />}
           {tab === 'inventory' && <Inventory items={items} onChange={setItems} notify={notify} />}
           {tab === 'orders' && <Orders orders={ordersList} onChange={setOrdersList} notify={notify} settings={settings} focusOrderId={focusOrderId} />}
@@ -243,6 +237,69 @@ export default function AdminApp() {
           </footer>
         </main>
       </div>
+
+      {/* Mobile bottom navigation: the 4 most-used sections + a sheet with the rest */}
+      <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 pb-[env(safe-area-inset-bottom)] backdrop-blur lg:hidden" aria-label="Sections">
+        <div className="grid grid-cols-5">
+          {[
+            { id: 'dashboard', label: 'Dashboard', icon: 'dashboard' },
+            { id: 'inventory', label: 'Inventory', icon: 'inventory' },
+            { id: 'orders', label: 'Orders', icon: 'orders' },
+            { id: 'finance', label: 'Finance', icon: 'finance' },
+          ].map((n) => (
+            <button
+              key={n.id}
+              onClick={() => go(n.id)}
+              aria-current={tab === n.id ? 'page' : undefined}
+              className={`relative flex flex-col items-center gap-0.5 py-2.5 text-[11px] font-semibold ${tab === n.id ? 'text-coral' : 'text-slate-500'}`}
+            >
+              <span className="relative">
+                <Icon name={n.icon} size={20} />
+                {n.id === 'orders' && ordersList.filter((o) => o.status === 'Requested').length > 0 && (
+                  <span className="absolute -right-2.5 -top-1.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-coral px-1 text-[10px] font-bold text-white">
+                    {ordersList.filter((o) => o.status === 'Requested').length}
+                  </span>
+                )}
+              </span>
+              {n.label}
+            </button>
+          ))}
+          <button onClick={() => setMoreOpen(true)} className="flex flex-col items-center gap-0.5 py-2.5 text-[11px] font-semibold text-slate-500">
+            <Icon name="more" size={20} />
+            More
+          </button>
+        </div>
+      </nav>
+
+      {moreOpen && (
+        <Modal title="All sections" onClose={() => setMoreOpen(false)}>
+          <div className="grid gap-1">
+            {NAV.map((n) => (
+              <button
+                key={n.id}
+                onClick={() => go(n.id)}
+                className={`flex items-center gap-3 rounded-xl px-3 py-3 text-left text-sm font-medium ${tab === n.id ? 'bg-blush/60 text-ink' : 'text-slate-600 hover:bg-cream'}`}
+              >
+                <Icon name={n.icon} size={18} />
+                {n.label}
+                {n.id === 'orders' && ordersList.filter((o) => o.status === 'Requested').length > 0 && (
+                  <span className="ml-auto rounded-full bg-coral px-2 py-0.5 text-[11px] font-bold text-white">
+                    {ordersList.filter((o) => o.status === 'Requested').length}
+                  </span>
+                )}
+              </button>
+            ))}
+            <a href="/" className="flex items-center gap-3 rounded-xl px-3 py-3 text-left text-sm font-medium text-slate-600 hover:bg-cream">
+              <Icon name="external" size={18} />
+              View storefront
+            </a>
+            <button onClick={() => { setAuthed(false); setMoreOpen(false) }} className="flex items-center gap-3 rounded-xl px-3 py-3 text-left text-sm font-medium text-rose-700 hover:bg-rose-50">
+              <Icon name="logout" size={18} />
+              Log out
+            </button>
+          </div>
+        </Modal>
+      )}
 
       <Toasts toasts={toasts} />
     </div>

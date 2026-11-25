@@ -41,12 +41,12 @@ export default function Customers({
 
       <div className="grid gap-5 lg:grid-cols-5">
         <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm lg:col-span-3">
-          <table className="w-full min-w-[560px] text-left text-sm">
+          <table className="w-full min-w-[480px] text-left text-sm">
             <thead>
               <tr className="border-b border-slate-100 text-xs uppercase tracking-wide text-slate-400">
                 <th className="px-4 py-3 font-semibold">Customer</th>
-                <th className="px-4 py-3 font-semibold">Town</th>
-                <th className="px-4 py-3 font-semibold">Events</th>
+                <th className="hidden px-4 py-3 font-semibold md:table-cell">Town</th>
+                <th className="hidden px-4 py-3 font-semibold sm:table-cell">Events</th>
                 <th className="px-4 py-3 font-semibold">Lifetime value</th>
               </tr>
             </thead>
@@ -57,8 +57,8 @@ export default function Customers({
                     <span className="block font-medium text-ink">{c.name}</span>
                     <span className="text-xs text-slate-400">{c.email}</span>
                   </td>
-                  <td className="px-4 py-2.5 text-slate-600">{c.town}</td>
-                  <td className="px-4 py-2.5">{c.events}</td>
+                  <td className="hidden px-4 py-2.5 text-slate-600 md:table-cell">{c.town}</td>
+                  <td className="hidden px-4 py-2.5 sm:table-cell">{c.events}</td>
                   <td className="px-4 py-2.5 font-medium">{money(c.lifetime)}</td>
                 </tr>
               ))}
@@ -104,11 +104,11 @@ export default function Customers({
                   <ul className="space-y-2">
                     {history.map((o) => (
                       <li key={o.id} className="flex items-center justify-between gap-2 text-sm">
-                        <span>
+                        <span className="min-w-0 flex-1 truncate">
                           <span className="font-semibold">{o.id}</span>
                           <span className="text-slate-500"> · {o.eventDate} · {o.venue}</span>
                         </span>
-                        <span className="flex items-center gap-2">
+                        <span className="flex shrink-0 items-center gap-2">
                           <span className="font-medium">{money(orderTotal(o, settings))}</span>
                           <Badge tone={o.status === 'Completed' ? 'green' : o.status === 'Cancelled' ? 'red' : 'sky'}>{o.status}</Badge>
                         </span>
