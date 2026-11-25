@@ -58,13 +58,13 @@ export default function HR({
       </div>
 
       <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
-        <table className="w-full min-w-[640px] text-left text-sm">
+        <table className="w-full min-w-[520px] text-left text-sm">
           <thead>
             <tr className="border-b border-slate-100 text-xs uppercase tracking-wide text-slate-400">
               <th className="px-4 py-3 font-semibold">Name</th>
               <th className="px-4 py-3 font-semibold">Role</th>
-              <th className="px-4 py-3 font-semibold">Location</th>
-              <th className="px-4 py-3 font-semibold">Phone</th>
+              <th className="hidden px-4 py-3 font-semibold md:table-cell">Location</th>
+              <th className="hidden px-4 py-3 font-semibold lg:table-cell">Phone</th>
               <th className="px-4 py-3 font-semibold">Status</th>
             </tr>
           </thead>
@@ -76,8 +76,8 @@ export default function HR({
                   <span className="text-xs text-slate-400">{s.email}</span>
                 </td>
                 <td className="px-4 py-2.5 text-slate-600">{s.role}</td>
-                <td className="px-4 py-2.5 text-slate-600">{s.location}</td>
-                <td className="px-4 py-2.5 text-slate-600">{s.phone}</td>
+                <td className="hidden px-4 py-2.5 text-slate-600 md:table-cell">{s.location}</td>
+                <td className="hidden px-4 py-2.5 text-slate-600 lg:table-cell">{s.phone}</td>
                 <td className="px-4 py-2.5">
                   <Badge tone={s.status === 'Active' ? 'green' : 'amber'}>{s.status}</Badge>
                 </td>
@@ -113,7 +113,7 @@ export default function HR({
           <table className="w-full min-w-[720px] text-left text-sm">
             <thead>
               <tr className="text-xs uppercase tracking-wide text-slate-400">
-                <th className="py-2 pr-3 font-semibold">Staff</th>
+                <th className="sticky left-0 bg-white py-2 pr-3 font-semibold">Staff</th>
                 {SHIFT_DAYS.map((d) => (
                   <th key={d} className="px-2 py-2 text-center font-semibold">
                     {d}
@@ -124,10 +124,10 @@ export default function HR({
             <tbody className="divide-y divide-slate-50">
               {onShift.map((s) => (
                 <tr key={s.id}>
-                  <td className="py-2 pr-3 font-medium text-ink">{s.name}</td>
+                  <td className="sticky left-0 bg-white py-2 pr-3 font-medium text-ink">{s.name}</td>
                   {(shifts[s.id] ?? []).map((code, i) => (
                     <td key={i} className="px-1.5 py-1.5">
-                      <span className={`block rounded-lg px-1 py-1.5 text-center text-xs font-semibold ${shiftTone(code)}`}>{code}</span>
+                      <span className={`block min-w-[56px] rounded-lg px-1 py-1.5 text-center text-xs font-semibold ${shiftTone(code)}`}>{code}</span>
                     </td>
                   ))}
                 </tr>

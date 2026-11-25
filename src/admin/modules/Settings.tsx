@@ -109,7 +109,7 @@ export default function Settings({
         </section>
 
         <div className="flex justify-end">
-          <PrimaryButton type="submit">{dirty ? 'Save settings' : 'Settings saved ✓'}</PrimaryButton>
+          <PrimaryButton type="submit" className="w-full sm:w-auto">{dirty ? 'Save settings' : 'Settings saved ✓'}</PrimaryButton>
         </div>
       </form>
 
@@ -129,7 +129,7 @@ export default function Settings({
               <select
                 value={u.role}
                 onChange={(e) => { setUsers(users.map((x) => (x.id === u.id ? { ...x, role: e.target.value as DemoUser['role'] } : x))); notify(`${u.name} is now ${e.target.value}`) }}
-                className={`${inputCls} w-auto`}
+                className={`${inputCls} w-full sm:w-auto`}
                 aria-label={`Role for ${u.name}`}
               >
                 <option>Admin</option>
