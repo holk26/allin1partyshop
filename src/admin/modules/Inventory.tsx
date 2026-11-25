@@ -116,16 +116,16 @@ export default function Inventory({
       </div>
 
       <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
-        <table className="w-full min-w-[760px] text-left text-sm">
+        <table className="w-full min-w-[560px] text-left text-sm">
           <thead>
             <tr className="border-b border-slate-100 text-xs uppercase tracking-wide text-slate-400">
               <th className="px-4 py-3 font-semibold">Item</th>
-              <th className="px-4 py-3 font-semibold">Category</th>
+              <th className="hidden px-4 py-3 font-semibold md:table-cell">Category</th>
               <th className="px-4 py-3 font-semibold">Rate / day</th>
               <th className="px-4 py-3 font-semibold">Stock</th>
               <th className="px-4 py-3 font-semibold">Available</th>
-              <th className="px-4 py-3 font-semibold">Condition</th>
-              <th className="px-4 py-3 font-semibold">Location</th>
+              <th className="hidden px-4 py-3 font-semibold lg:table-cell">Condition</th>
+              <th className="hidden px-4 py-3 font-semibold md:table-cell">Location</th>
               <th className="px-4 py-3" />
             </tr>
           </thead>
@@ -139,7 +139,7 @@ export default function Inventory({
                     <span className="block font-medium text-ink">{i.name}</span>
                     <span className="text-xs text-slate-400">{i.sku}</span>
                   </td>
-                  <td className="px-4 py-2.5 text-slate-600">{i.category}</td>
+                  <td className="hidden px-4 py-2.5 text-slate-600 md:table-cell">{i.category}</td>
                   <td className="px-4 py-2.5 font-medium">{money(i.dailyRate)}</td>
                   <td className="px-4 py-2.5">{i.stock}</td>
                   <td className="px-4 py-2.5">
@@ -147,12 +147,12 @@ export default function Inventory({
                       {free} free · {i.reserved} reserved
                     </Badge>
                   </td>
-                  <td className="px-4 py-2.5 text-slate-600">{i.condition}</td>
-                  <td className="px-4 py-2.5 text-slate-600">{i.location}</td>
+                  <td className="hidden px-4 py-2.5 text-slate-600 lg:table-cell">{i.condition}</td>
+                  <td className="hidden px-4 py-2.5 text-slate-600 md:table-cell">{i.location}</td>
                   <td className="px-4 py-2.5">
                     <button
                       onClick={(e) => { e.stopPropagation(); openEdit(i) }}
-                      className="rounded-lg px-2.5 py-1.5 text-xs font-semibold text-coral hover:bg-blush"
+                      className="rounded-lg px-3 py-2 text-xs font-semibold text-coral hover:bg-blush"
                     >
                       Edit
                     </button>
@@ -183,9 +183,9 @@ export default function Inventory({
             <GhostButton onClick={() => openEdit(selected)}>Edit item</GhostButton>
           </div>
           <p className="mb-2 mt-4 text-sm font-semibold text-slate-700">Availability — next 14 days (units free)</p>
-          <div className="grid grid-cols-7 gap-1.5 sm:grid-cols-14">
+          <div className="flex gap-1.5 overflow-x-auto pb-1">
             {Array.from({ length: 14 }, (_, d) => dayAvailability(selected, d)).map((day) => (
-              <div key={day.label} className={`rounded-lg border px-1 py-2 text-center ${day.tone}`}>
+              <div key={day.label} className={`min-w-[64px] flex-1 shrink-0 rounded-lg border px-1 py-2 text-center ${day.tone}`}>
                 <span className="block text-[11px] font-semibold">{day.label}</span>
                 <span className="block text-sm font-bold">{day.free}</span>
               </div>
@@ -204,7 +204,7 @@ export default function Inventory({
             <Field label="Item name">
               <input value={draft.name} onChange={(e) => setDraft({ ...draft, name: e.target.value })} className={inputCls} placeholder="e.g. 20' × 20' Frame Tent" />
             </Field>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               <Field label="Category">
                 <select value={draft.category} onChange={(e) => setDraft({ ...draft, category: e.target.value })} className={inputCls}>
                   {RENTAL_CATEGORIES.map((c) => (
@@ -236,9 +236,9 @@ export default function Inventory({
                 <input type="number" min={0} value={draft.reserved} onChange={(e) => setDraft({ ...draft, reserved: Number(e.target.value) })} className={inputCls} />
               </Field>
             </div>
-            <div className="flex justify-end gap-2 pt-1">
-              <GhostButton onClick={() => { setEditing(null); setAdding(false) }}>Cancel</GhostButton>
-              <PrimaryButton type="submit">{editing ? 'Save changes' : 'Add item'}</PrimaryButton>
+            <div className="flex flex-col-reverse gap-2 pt-1 sm:flex-row sm:justify-end">
+              <GhostButton onClick={() => { setEditing(null); setAdding(false) }} className="w-full sm:w-auto">Cancel</GhostButton>
+              <PrimaryButton type="submit" className="w-full sm:w-auto">{editing ? 'Save changes' : 'Add item'}</PrimaryButton>
             </div>
           </form>
         </Modal>

@@ -55,7 +55,7 @@ export default function Dashboard({ go }: { go: (tab: string, orderId?: string) 
           <ul className="space-y-2.5">
             {lowStock.map((i) => (
               <li key={i.id}>
-                <button onClick={() => go('inventory')} className="flex w-full items-center justify-between gap-2 rounded-xl px-2 py-1.5 text-left hover:bg-cream">
+                <button onClick={() => go('inventory')} className="flex w-full items-center justify-between gap-2 rounded-xl px-2 py-2 text-left hover:bg-cream">
                   <span className="min-w-0">
                     <span className="block truncate text-sm font-medium text-ink">{i.name}</span>
                     <span className="text-xs text-slate-500">{i.location}</span>

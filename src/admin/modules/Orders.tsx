@@ -120,7 +120,7 @@ export default function Orders({
             <button
               key={s}
               onClick={() => setFilter(s)}
-              className={`rounded-full border px-3 py-1.5 text-sm font-medium transition ${
+              className={`rounded-full border px-3 py-2 text-sm font-medium transition ${
                 filter === s ? 'border-coral bg-coral text-white' : 'border-slate-300 bg-white text-slate-600 hover:bg-slate-50'
               }`}
             >
@@ -137,13 +137,13 @@ export default function Orders({
       </div>
 
       <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
-        <table className="w-full min-w-[820px] text-left text-sm">
+        <table className="w-full min-w-[640px] text-left text-sm">
           <thead>
             <tr className="border-b border-slate-100 text-xs uppercase tracking-wide text-slate-400">
               <th className="px-4 py-3 font-semibold">Quote</th>
               <th className="px-4 py-3 font-semibold">Customer</th>
               <th className="px-4 py-3 font-semibold">Event date</th>
-              <th className="px-4 py-3 font-semibold">Venue</th>
+              <th className="hidden px-4 py-3 font-semibold lg:table-cell">Venue</th>
               <th className="px-4 py-3 font-semibold">Total (incl. tax)</th>
               <th className="px-4 py-3 font-semibold">Deposit</th>
               <th className="px-4 py-3 font-semibold">Status</th>
@@ -155,7 +155,7 @@ export default function Orders({
                 <td className="px-4 py-2.5 font-semibold text-ink">{o.id}</td>
                 <td className="px-4 py-2.5">{o.customer}</td>
                 <td className="px-4 py-2.5 text-slate-600">{o.eventDate}</td>
-                <td className="max-w-56 truncate px-4 py-2.5 text-slate-600">{o.venue}</td>
+                <td className="hidden max-w-56 truncate px-4 py-2.5 text-slate-600 lg:table-cell">{o.venue}</td>
                 <td className="px-4 py-2.5 font-medium">{money(orderTotal(o, settings))}</td>
                 <td className="px-4 py-2.5">
                   <Badge tone={o.depositPaid ? 'green' : 'amber'}>{o.depositPaid ? `Paid ${money(o.deposit)}` : `${money(o.deposit)} due`}</Badge>
@@ -188,7 +188,7 @@ export default function Orders({
             </div>
             <p className="rounded-xl bg-cream px-3 py-2 text-sm text-slate-600">{selected.notes}</p>
 
-            <table className="w-full text-left text-sm">
+            <div className="overflow-x-auto"><table className="w-full min-w-[480px] text-left text-sm">
               <thead>
                 <tr className="border-b border-slate-100 text-xs uppercase tracking-wide text-slate-400">
                   <th className="py-2 font-semibold">Item</th>
@@ -217,6 +217,7 @@ export default function Orders({
                 )}
               </tbody>
             </table>
+            </div>
 
             <div className="flex flex-wrap items-end gap-2 rounded-xl bg-slate-50 p-3">
               <div className="min-w-44 flex-1">
@@ -230,17 +231,17 @@ export default function Orders({
                   </select>
                 </Field>
               </div>
-              <div className="w-20">
+              <div className="w-[calc(50%-0.25rem)] sm:w-20">
                 <Field label="Qty">
                   <input type="number" min={1} value={lineQty} onChange={(e) => setLineQty(Number(e.target.value))} className={inputCls} />
                 </Field>
               </div>
-              <div className="w-20">
+              <div className="w-[calc(50%-0.25rem)] sm:w-20">
                 <Field label="Days">
                   <input type="number" min={1} value={lineDays} onChange={(e) => setLineDays(Number(e.target.value))} className={inputCls} />
                 </Field>
               </div>
-              <GhostButton onClick={() => addLine(selected)}>Add item</GhostButton>
+              <GhostButton onClick={() => addLine(selected)} className="w-full sm:w-auto">Add item</GhostButton>
             </div>
 
             <div className="space-y-1 border-t border-slate-100 pt-3 text-sm">
@@ -311,9 +312,9 @@ export default function Orders({
                 <option>Comox</option>
               </select>
             </Field>
-            <div className="flex justify-end gap-2 pt-1">
-              <GhostButton onClick={() => setShowNew(false)}>Cancel</GhostButton>
-              <PrimaryButton type="submit">Create quote</PrimaryButton>
+            <div className="flex flex-col-reverse gap-2 pt-1 sm:flex-row sm:justify-end">
+              <GhostButton onClick={() => setShowNew(false)} className="w-full sm:w-auto">Cancel</GhostButton>
+              <PrimaryButton type="submit" className="w-full sm:w-auto">Create quote</PrimaryButton>
             </div>
           </form>
         </Modal>

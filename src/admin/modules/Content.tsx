@@ -81,11 +81,11 @@ export default function Content({
               <Badge tone={p.published ? 'green' : 'amber'}>{p.published ? 'Published' : 'Draft'}</Badge>
               <button
                 onClick={() => { setEditingPage(p); setTitleDraft(p.title) }}
-                className="rounded-lg px-2.5 py-1.5 text-xs font-semibold text-coral hover:bg-blush"
+                className="rounded-lg px-3 py-2 text-xs font-semibold text-coral hover:bg-blush"
               >
                 Edit title
               </button>
-              <button onClick={() => togglePage(p)} className="rounded-lg px-2.5 py-1.5 text-xs font-semibold text-teal-dark hover:bg-mint">
+              <button onClick={() => togglePage(p)} className="rounded-lg px-3 py-2 text-xs font-semibold text-teal-dark hover:bg-mint">
                 {p.published ? 'Unpublish' : 'Publish'}
               </button>
             </li>
@@ -108,7 +108,7 @@ export default function Content({
                 <p className="text-xs text-slate-400">Updated {a.updated}</p>
                 <div className="mt-2 flex items-center justify-between">
                   <Badge tone={a.published ? 'green' : 'amber'}>{a.published ? 'Live' : 'Draft'}</Badge>
-                  <button onClick={() => toggleAlbum(a)} className="text-xs font-semibold text-coral hover:underline">
+                  <button onClick={() => toggleAlbum(a)} className="rounded-lg px-2 py-1.5 text-xs font-semibold text-coral hover:bg-blush">
                     {a.published ? 'Hide album' : 'Publish album'}
                   </button>
                 </div>
@@ -150,9 +150,9 @@ export default function Content({
               <input value={titleDraft} onChange={(e) => setTitleDraft(e.target.value)} className={inputCls} />
             </Field>
             <p className="text-xs text-slate-400">Slug {editingPage.slug} stays unchanged so links don't break.</p>
-            <div className="flex justify-end gap-2 pt-1">
-              <GhostButton onClick={() => setEditingPage(null)}>Cancel</GhostButton>
-              <PrimaryButton type="submit">Save title</PrimaryButton>
+            <div className="flex flex-col-reverse gap-2 pt-1 sm:flex-row sm:justify-end">
+              <GhostButton onClick={() => setEditingPage(null)} className="w-full sm:w-auto">Cancel</GhostButton>
+              <PrimaryButton type="submit" className="w-full sm:w-auto">Save title</PrimaryButton>
             </div>
           </form>
         </Modal>
@@ -173,9 +173,9 @@ export default function Content({
             <Field label="Start date">
               <input value={annDraft.starts} onChange={(e) => setAnnDraft({ ...annDraft, starts: e.target.value })} className={inputCls} />
             </Field>
-            <div className="flex justify-end gap-2 pt-1">
-              <GhostButton onClick={() => setShowAnnouncement(false)}>Cancel</GhostButton>
-              <PrimaryButton type="submit">Publish announcement</PrimaryButton>
+            <div className="flex flex-col-reverse gap-2 pt-1 sm:flex-row sm:justify-end">
+              <GhostButton onClick={() => setShowAnnouncement(false)} className="w-full sm:w-auto">Cancel</GhostButton>
+              <PrimaryButton type="submit" className="w-full sm:w-auto">Publish announcement</PrimaryButton>
             </div>
           </form>
         </Modal>

@@ -66,7 +66,7 @@ export default function Sales({
         </PrimaryButton>
       </div>
 
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
         <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
           <p className="text-sm text-slate-500">Retail revenue (all time, demo)</p>
           <p className="text-xl font-bold text-ink">{money(monthRevenue)}</p>
@@ -92,28 +92,28 @@ export default function Sales({
           <button
             key={c}
             onClick={() => setCat(c)}
-            className={`rounded-full border px-3 py-1.5 text-sm font-medium ${cat === c ? 'border-coral bg-coral text-white' : 'border-slate-300 bg-white text-slate-600 hover:bg-slate-50'}`}
+            className={`rounded-full border px-3 py-2 text-sm font-medium ${cat === c ? 'border-coral bg-coral text-white' : 'border-slate-300 bg-white text-slate-600 hover:bg-slate-50'}`}
           >
             {c}
           </button>
         ))}
         <button
           onClick={() => setClearanceOnly(!clearanceOnly)}
-          className={`rounded-full border px-3 py-1.5 text-sm font-medium ${clearanceOnly ? 'border-rose-400 bg-rose-100 text-rose-800' : 'border-slate-300 bg-white text-slate-600 hover:bg-slate-50'}`}
+          className={`rounded-full border px-3 py-2 text-sm font-medium ${clearanceOnly ? 'border-rose-400 bg-rose-100 text-rose-800' : 'border-slate-300 bg-white text-slate-600 hover:bg-slate-50'}`}
         >
           Clearance only
         </button>
       </div>
 
       <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
-        <table className="w-full min-w-[680px] text-left text-sm">
+        <table className="w-full min-w-[560px] text-left text-sm">
           <thead>
             <tr className="border-b border-slate-100 text-xs uppercase tracking-wide text-slate-400">
               <th className="px-4 py-3 font-semibold">Product</th>
-              <th className="px-4 py-3 font-semibold">Category</th>
+              <th className="hidden px-4 py-3 font-semibold md:table-cell">Category</th>
               <th className="px-4 py-3 font-semibold">Price</th>
               <th className="px-4 py-3 font-semibold">Stock</th>
-              <th className="px-4 py-3 font-semibold">Sold</th>
+              <th className="hidden px-4 py-3 font-semibold md:table-cell">Sold</th>
               <th className="px-4 py-3 font-semibold">Flags</th>
               <th className="px-4 py-3" />
             </tr>
@@ -122,7 +122,7 @@ export default function Sales({
             {filtered.map((p) => (
               <tr key={p.id} className="hover:bg-cream/60">
                 <td className="px-4 py-2.5 font-medium text-ink">{p.name}</td>
-                <td className="px-4 py-2.5 text-slate-600">{p.category}</td>
+                <td className="hidden px-4 py-2.5 text-slate-600 md:table-cell">{p.category}</td>
                 <td className="px-4 py-2.5">
                   <span className="font-medium">{money(p.price)}</span>
                   {p.compareAt && <span className="ml-2 text-xs text-slate-400 line-through">{money(p.compareAt)}</span>}
@@ -130,15 +130,15 @@ export default function Sales({
                 <td className="px-4 py-2.5">
                   <Badge tone={p.stock < 20 ? 'red' : 'green'}>{p.stock} on hand</Badge>
                 </td>
-                <td className="px-4 py-2.5">{p.sold}</td>
+                <td className="hidden px-4 py-2.5 md:table-cell">{p.sold}</td>
                 <td className="px-4 py-2.5">{p.clearance && <Badge tone="rose">Clearance</Badge>}</td>
                 <td className="whitespace-nowrap px-4 py-2.5">
-                  <button onClick={() => markSold(p)} className="rounded-lg px-2.5 py-1.5 text-xs font-semibold text-teal-dark hover:bg-mint">
+                  <button onClick={() => markSold(p)} className="rounded-lg px-3 py-2 text-xs font-semibold text-teal-dark hover:bg-mint">
                     Record sale
                   </button>
                   <button
                     onClick={() => { setDraft({ name: p.name, category: p.category, price: p.price, compareAt: p.compareAt ?? 0, stock: p.stock, clearance: p.clearance }); setEditing(p) }}
-                    className="rounded-lg px-2.5 py-1.5 text-xs font-semibold text-coral hover:bg-blush"
+                    className="rounded-lg px-3 py-2 text-xs font-semibold text-coral hover:bg-blush"
                   >
                     Edit
                   </button>
@@ -165,7 +165,7 @@ export default function Sales({
             <Field label="Product name">
               <input value={draft.name} onChange={(e) => setDraft({ ...draft, name: e.target.value })} className={inputCls} />
             </Field>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               <Field label="Category">
                 <select value={draft.category} onChange={(e) => setDraft({ ...draft, category: e.target.value })} className={inputCls}>
                   <option>Balloons</option>
@@ -188,9 +188,9 @@ export default function Sales({
               <input type="checkbox" checked={draft.clearance} onChange={(e) => setDraft({ ...draft, clearance: e.target.checked })} className="h-4 w-4 accent-rose-500" />
               Mark as clearance item
             </label>
-            <div className="flex justify-end gap-2 pt-1">
-              <GhostButton onClick={() => { setEditing(null); setAdding(false) }}>Cancel</GhostButton>
-              <PrimaryButton type="submit">{editing ? 'Save changes' : 'Add product'}</PrimaryButton>
+            <div className="flex flex-col-reverse gap-2 pt-1 sm:flex-row sm:justify-end">
+              <GhostButton onClick={() => { setEditing(null); setAdding(false) }} className="w-full sm:w-auto">Cancel</GhostButton>
+              <PrimaryButton type="submit" className="w-full sm:w-auto">{editing ? 'Save changes' : 'Add product'}</PrimaryButton>
             </div>
           </form>
         </Modal>
