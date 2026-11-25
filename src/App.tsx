@@ -21,6 +21,8 @@ import {
   X,
 } from 'lucide-react'
 import './App.css'
+import { Route, Routes } from 'react-router'
+import AdminApp from './admin/AdminApp'
 
 const IMG = {
   hero: '/images/hero-celebration.webp',
@@ -145,7 +147,7 @@ function DraggableBadge({ children, className }: { children: ReactNode; classNam
   return <div className={`draggable-badge ${className}`} style={{ transform: `translate3d(${offset.x}px,${offset.y}px,0)` }} onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onUp}><div className="draggable-badge-inner">{children}</div></div>
 }
 
-export default function App() {
+function Storefront() {
   const [filter, setFilter] = useState<'All' | Occasion>('All')
   const [occasion, setOccasion] = useState<Occasion>('Weddings')
   const [quoteOpen, setQuoteOpen] = useState(false)
@@ -327,4 +329,13 @@ export default function App() {
       </div></aside></div>}
     {toast && <div className="toast" role="status"><Check size={17} />{toast}<button onClick={openQuote}>View quote</button></div>}
   </div>
+}
+
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/admin/*" element={<AdminApp />} />
+      <Route path="*" element={<Storefront />} />
+    </Routes>
+  )
 }
