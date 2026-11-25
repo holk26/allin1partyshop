@@ -8,7 +8,10 @@ const BAR_COLORS = ['bg-coral', 'bg-sun', 'bg-teal', 'bg-sky-400', 'bg-violet-40
 export default function Reports({ ordersList, settings }: { ordersList: Order[]; settings: SettingsState }) {
   const active = ordersList.filter((o) => o.status !== 'Cancelled')
 
-  const utilization = useMemo(() => {
+  // One shared category list for both columns: same rows, same order, same
+  // color per category, so the two panels read as a single integrated view
+  // instead of two unrelated lists.
+  const categories = useMemo(() => {
     const byCat = new Map<string, { stock: number; reserved: number }>()
     for (const item of rentalItems) {
       const cur = byCat.get(item.category) ?? { stock: 0, reserved: 0 }
@@ -16,24 +19,30 @@ export default function Reports({ ordersList, settings }: { ordersList: Order[];
       cur.reserved += item.reserved
       byCat.set(item.category, cur)
     }
-    return [...byCat.entries()]
-      .map(([label, v], i) => ({ label, value: v.stock === 0 ? 0 : Math.round((v.reserved / v.stock) * 100), color: BAR_COLORS[i % BAR_COLORS.length] }))
-      .sort((a, b) => b.value - a.value)
-  }, [])
-
-  const revenueByCat = useMemo(() => {
-    const byCat = new Map<string, number>()
+    const revenue = new Map<string, number>()
     for (const o of active) {
       for (const l of o.lines) {
         const item = rentalItems.find((i) => i.id === l.itemId)
         const cat = item?.category ?? 'Retail'
-        byCat.set(cat, (byCat.get(cat) ?? 0) + l.qty * l.rate * l.days)
+        revenue.set(cat, (revenue.get(cat) ?? 0) + l.qty * l.rate * l.days)
       }
     }
-    return [...byCat.entries()]
-      .map(([label, value], i) => ({ label, value, color: BAR_COLORS[i % BAR_COLORS.length] }))
-      .sort((a, b) => b.value - a.value)
+    const pct = (label: string) => {
+      const v = byCat.get(label)
+      return !v || v.stock === 0 ? 0 : Math.round((v.reserved / v.stock) * 100)
+    }
+    const labels = [...new Set([...byCat.keys(), ...revenue.keys()])]
+    labels.sort((a, b) => (revenue.get(b) ?? 0) - (revenue.get(a) ?? 0) || pct(b) - pct(a) || a.localeCompare(b))
+    return labels.map((label, i) => ({
+      label,
+      color: BAR_COLORS[i % BAR_COLORS.length],
+      utilization: pct(label),
+      revenue: revenue.get(label) ?? 0,
+    }))
   }, [active])
+
+  const utilization = categories.map((c) => ({ label: c.label, value: c.utilization, color: c.color }))
+  const revenueByCat = categories.map((c) => ({ label: c.label, value: c.revenue, color: c.color }))
 
   const topItems = useMemo(() => {
     const tally = new Map<string, { name: string; qty: number; revenue: number }>()
