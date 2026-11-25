@@ -66,6 +66,9 @@ export default function Dashboard({ go }: { go: (tab: string, orderId?: string) 
                 </button>
               </li>
             ))}
+            {lowStock.length === 0 && (
+              <li className="rounded-xl bg-mint/60 px-3 py-2.5 text-sm text-slate-600">All stocked up — no items below 25% availability right now.</li>
+            )}
           </ul>
           <button onClick={() => go('inventory')} className="mt-3 text-sm font-semibold text-coral hover:underline">
             Open inventory →
