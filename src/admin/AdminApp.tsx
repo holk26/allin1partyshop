@@ -151,7 +151,7 @@ export default function AdminApp() {
     <div className="admin-scope flex min-h-dvh flex-col">
       {/* Top bar */}
       <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
-        <div className="flex items-center gap-3 px-4 py-3 sm:px-6">
+        <div className="mx-auto flex w-full max-w-[1600px] items-center gap-3 px-4 py-3 sm:px-6">
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-sun to-coral text-base font-black text-white">
             A1
           </div>
@@ -184,9 +184,9 @@ export default function AdminApp() {
         </div>
       </header>
 
-      <div className="mx-auto flex w-full max-w-[1400px] flex-1 items-start">
+      <div className="mx-auto flex w-full max-w-[1600px] flex-1 items-start">
         {/* Sidebar */}
-        <aside className="sticky top-[65px] hidden w-60 shrink-0 self-stretch border-r border-slate-200 bg-white px-3 py-4 lg:block">
+        <aside className="sticky top-[65px] hidden w-60 shrink-0 flex-col self-stretch border-r border-slate-200 bg-white px-3 py-4 lg:flex">
           <nav className="space-y-1" aria-label="Sections">
             {NAV.map((n) => (
               <button
@@ -206,7 +206,8 @@ export default function AdminApp() {
               </button>
             ))}
           </nav>
-          <div className="mt-6 rounded-2xl bg-cream p-3 text-xs leading-relaxed text-slate-600">
+          <div className="mt-auto pt-6">
+          <div className="rounded-2xl bg-cream p-3 text-xs leading-relaxed text-slate-600">
             <p className="font-bold text-ink">Showrooms</p>
             <p className="mt-1">Campbell River — {settings.addrCR}</p>
             <p className="mt-1">Comox — {settings.addrComox}</p>
@@ -216,6 +217,7 @@ export default function AdminApp() {
           <a href="/" className="mt-3 flex items-center gap-1.5 px-1 text-xs font-semibold text-coral hover:underline">
             View storefront <Icon name="external" size={13} />
           </a>
+          </div>
         </aside>
 
         {/* Content */}
