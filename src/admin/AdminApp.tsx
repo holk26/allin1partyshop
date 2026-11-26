@@ -151,7 +151,7 @@ export default function AdminApp() {
     <div className="admin-scope flex min-h-dvh flex-col">
       {/* Top bar */}
       <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
-        <div className="mx-auto flex w-full max-w-[1600px] items-center gap-3 px-4 py-3 sm:px-6">
+        <div className="flex items-center gap-3 px-4 py-3 sm:px-6">
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-sun to-coral text-base font-black text-white">
             A1
           </div>
@@ -184,7 +184,7 @@ export default function AdminApp() {
         </div>
       </header>
 
-      <div className="mx-auto flex w-full max-w-[1600px] flex-1 items-start">
+      <div className="flex w-full flex-1 items-start">
         {/* Sidebar */}
         <aside className="sticky top-[65px] hidden w-60 shrink-0 flex-col self-stretch border-r border-slate-200 bg-white px-3 py-4 lg:flex">
           <nav className="space-y-1" aria-label="Sections">
